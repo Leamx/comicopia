@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>dev.matrixlab</groupId>
-    <artifactId>Comicopia</artifactId>
+    <artifactId>comicopia</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Comicopia</name>
-    <description>Comicopia</description>
+    <name>comicopia</name>
+    <description>comicopia</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -35,6 +35,20 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,5 +1,29 @@
 server:
-  port: 8080
+  port: 9090
+spring:
+  application:
+    name: comicopia
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/comicopia?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowMultiQueries=true
+      username: root
+      password: root
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: password
+    database: 9
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 10MB
 
 mybatis:
   mapper-locations: classpath*:mybatis/**/**.xml

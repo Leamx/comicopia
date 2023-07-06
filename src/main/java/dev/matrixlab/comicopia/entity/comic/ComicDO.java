@@ -27,6 +27,4 @@ public class ComicDO {
 
     private Date publishTime;
 
-    private String tenant;
-
 }

@@ -15,7 +15,7 @@ public class CallbackDataDTO implements Serializable {
 
     private String message;
 
-    private String code;
+    private Integer code;
 
     private static final ThreadLocal<Object> resource = new ThreadLocal<>();
 
@@ -27,8 +27,9 @@ public class CallbackDataDTO implements Serializable {
         try {
             CallbackDataDTO instance = new CallbackDataDTO();
             instance.setSuccess(success);
+            instance.setData(null);
             instance.setMessage((String) resource.get());
-            instance.setCode("0");
+            instance.setCode(0);
             return instance;
         } finally {
             resource.remove();
@@ -41,7 +42,7 @@ public class CallbackDataDTO implements Serializable {
             instance.setSuccess(success);
             instance.setData(data);
             instance.setMessage((String) resource.get());
-            instance.setCode("0");
+            instance.setCode(0);
             return instance;
         } finally {
             resource.remove();
@@ -62,11 +63,15 @@ public class CallbackDataDTO implements Serializable {
             instance.setSuccess(false);
             instance.setData(resource.get());
             instance.setMessage(message);
-            instance.setCode("10");
+            instance.setCode(10);
             return instance;
         } finally {
             resource.remove();
         }
+    }
+
+    public static void setResource(Object data) {
+        resource.set(data);
     }
 
 }

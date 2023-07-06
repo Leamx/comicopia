@@ -16,7 +16,7 @@ public class ComicController {
     private final ComicService comicService;
 
     private CallbackDataDTO createComic(@RequestBody ComicDTO comicDTO) {
-        return CallbackDataDTO.build(true, comicService.createComic());
+        return CallbackDataDTO.build(true, null);
     }
 
 }

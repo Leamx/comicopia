@@ -23,8 +23,9 @@ public class CallbackDataDTO implements Serializable {
 
     }
 
-    public static CallbackDataDTO build(boolean success) {
+    public static CallbackDataDTO build(boolean success, Runnable operation) {
         try {
+            operation.run();
             CallbackDataDTO instance = new CallbackDataDTO();
             instance.setSuccess(success);
             instance.setData(null);

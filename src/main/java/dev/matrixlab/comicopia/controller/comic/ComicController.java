@@ -4,9 +4,7 @@ import dev.matrixlab.comicopia.dto.comic.ComicDTO;
 import dev.matrixlab.comicopia.dto.system.CallbackDataDTO;
 import dev.matrixlab.comicopia.service.comic.ComicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/comic")
@@ -15,8 +13,23 @@ public class ComicController {
 
     private final ComicService comicService;
 
+    @PostMapping("/createComic")
     private CallbackDataDTO createComic(@RequestBody ComicDTO comicDTO) {
-        return CallbackDataDTO.build(true, null);
+        return CallbackDataDTO.build(true, () -> {
+            comicService.createComic(comicDTO);
+        });
+    }
+
+    @PostMapping("/deleteComicById")
+    private CallbackDataDTO deleteComicById(@RequestBody ComicDTO comicDTO) {
+        return CallbackDataDTO.build(true, () -> {
+           comicService.deleteComicById(comicDTO);
+        });
+    }
+
+    @GetMapping("/getComicListByName")
+    private CallbackDataDTO getComicListByName(@RequestParam("name") String name) {
+        return CallbackDataDTO.build(true, comicService.getComicListByName(name));
     }
 
 }

@@ -1,6 +1,8 @@
 package dev.matrixlab.comicopia.dto.mapper;
 
+import dev.matrixlab.comicopia.dto.comic.AuthorDTO;
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
+import dev.matrixlab.comicopia.entity.comic.AuthorDO;
 import dev.matrixlab.comicopia.entity.comic.ComicDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,12 +16,12 @@ public interface BeanMapperStruct {
 
     // -------------------------- comic -------------------------------------
 
-    @Mapping(source = "updateTime", target = "updateTime", dateFormat = "yyyy-MM-dd HH:mm:ss")
-    @Mapping(source = "publishTime", target = "publishTime", dateFormat = "yyyy-MM-dd HH:mm:ss")
     ComicDO comicDTO2ComicDO(ComicDTO comicDTO);
 
-    @Mapping(source = "updateTime", target = "updateTime", dateFormat = "yyyy-MM-dd HH:mm:ss")
-    @Mapping(source = "publishTime", target = "publishTime", dateFormat = "yyyy-MM-dd HH:mm:ss")
     ComicDTO comicDO2ComicDTO(ComicDO comicDO);
+
+    // -------------------------- author -------------------------------------
+
+    AuthorDO authorDTO2AuthorDO(AuthorDTO authorDTO);
 
 }

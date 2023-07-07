@@ -4,4 +4,86 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.ComicMapper">
 
+    <resultMap id="ComicDO" type="dev.matrixlab.comicopia.entity.comic.ComicDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="cover_url" jdbcType="VARCHAR" property="coverUrl"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="views" jdbcType="BIGINT" property="views"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="ComicDTO" type="dev.matrixlab.comicopia.dto.comic.ComicDTO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="cover_url" jdbcType="VARCHAR" property="coverUrl"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="views" jdbcType="BIGINT" property="views"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
+    </resultMap>
+
+    <insert id="insertComic" parameterType="dev.matrixlab.comicopia.entity.comic.ComicDO" useGeneratedKeys="true" keyProperty="id">
+        insert into co_comic (id, name, description, cover_url, status, views, likes, gmt_create, gmt_modified)
+        values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{coverUrl, jdbcType=VARCHAR},
+        #{status, jdbcType=INTEGER}, #{views, jdbcType=BIGINT}, #{likes, jdbcType=BIGINT}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
+    </insert>
+
+    <delete id="deleteComicById">
+        delete from co_comic where id = #{comicId}
+    </delete>
+
+    <update id="updateComicById" parameterType="dev.matrixlab.comicopia.entity.comic.ComicDO">
+        update from co_comic c
+        <set>
+            <if test="name != null">
+                c.name = #{name},
+            </if>
+            <if test="description != null">
+                c.description = #{description},
+            </if>
+            <if test="coverUrl != null">
+                c.cover_url = #{coverUrl},
+            </if>
+            <if test="status != null">
+                c.status = #{status},
+            </if>
+            <if test="views != null">
+                c.views = #{views},
+            </if>
+            <if test="likes != null">
+                c.likes = #{likes},
+            </if>
+            <if test="gmtModified != null">
+                c.gmt_modified = #{gmtModified},
+            </if>
+        </set>
+        <where>
+            c.id = #{id}
+        </where>
+    </update>
+
+    <select id="getComicListByName" resultMap="ComicDTO">
+        select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
+        from co_comic c
+        where c.name like concat('%', #{comicName}, '%')
+    </select>
+
+    <select id="nameDuplicateCheck" resultType="java.lang.Integer">
+        select count(*)
+        from co_comic c
+        where c.name = #{comicName}
+    </select>
+
+    <select id="checkComicExist" resultType="java.lang.Integer">
+        select count(*)
+        from co_comic c
+        where c.id = #{comicId}
+    </select>
+
 </mapper>

@@ -21,10 +21,8 @@ public class ComicDO {
 
     private Long likes;
 
-    private Date createTime;
+    private Long gmtCreate;
 
-    private Date updateTime;
-
-    private Date publishTime;
+    private Long gmtModified;
 
 }

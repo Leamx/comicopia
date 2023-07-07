@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class CallbackDataDTO implements Serializable {
+public class CallbackData implements Serializable {
 
     private static final long serialVersionUID = -7954752710724421370L;
 
@@ -19,14 +19,14 @@ public class CallbackDataDTO implements Serializable {
 
     private static final ThreadLocal<Object> resource = new ThreadLocal<>();
 
-    private CallbackDataDTO() {
+    private CallbackData() {
 
     }
 
-    public static CallbackDataDTO build(boolean success, Runnable operation) {
+    public static CallbackData build(boolean success, Runnable operation) {
         try {
             operation.run();
-            CallbackDataDTO instance = new CallbackDataDTO();
+            CallbackData instance = new CallbackData();
             instance.setSuccess(success);
             instance.setData(null);
             instance.setMessage((String) resource.get());
@@ -37,9 +37,9 @@ public class CallbackDataDTO implements Serializable {
         }
     }
 
-    public static CallbackDataDTO build(boolean success, Object data) {
+    public static CallbackData build(boolean success, Object data) {
         try {
-            CallbackDataDTO instance = new CallbackDataDTO();
+            CallbackData instance = new CallbackData();
             instance.setSuccess(success);
             instance.setData(data);
             instance.setMessage((String) resource.get());
@@ -50,17 +50,17 @@ public class CallbackDataDTO implements Serializable {
         }
     }
 
-    public static CallbackDataDTO build(boolean success, Object data, String message) {
-        CallbackDataDTO instance = new CallbackDataDTO();
+    public static CallbackData build(boolean success, Object data, String message) {
+        CallbackData instance = new CallbackData();
         instance.setSuccess(success);
         instance.setData(data);
         instance.setMessage(message);
         return instance;
     }
 
-    public static CallbackDataDTO buildErrorReturn(String message) {
+    public static CallbackData buildErrorReturn(String message) {
         try {
-            CallbackDataDTO instance = new CallbackDataDTO();
+            CallbackData instance = new CallbackData();
             instance.setSuccess(false);
             instance.setData(resource.get());
             instance.setMessage(message);

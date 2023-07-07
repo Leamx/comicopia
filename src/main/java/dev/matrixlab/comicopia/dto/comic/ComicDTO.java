@@ -24,8 +24,8 @@ public class ComicDTO implements Serializable {
 
     private Long likes;
 
-    private String updateTime;
+    private Long gmtCreate;
 
-    private String publishTime;
+    private Long gmtModified;
 
 }

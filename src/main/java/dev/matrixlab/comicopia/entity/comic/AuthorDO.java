@@ -15,8 +15,8 @@ public class AuthorDO {
 
     private String avatar;
 
-    private Date createTime;
+    private Long gmtCreate;
 
-    private Date updateTime;
+    private Long gmtModified;
 
 }

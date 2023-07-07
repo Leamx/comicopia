@@ -15,12 +15,10 @@ public class ChapterDO {
 
     private String subTitle;
 
-    private Integer chapterNum;
+    private Integer chapterOrder;
 
-    private Date createTime;
+    private Long gmtCreate;
 
-    private Date updateTime;
-
-    private Date publishTime;
+    private Long gmtModified;
 
 }

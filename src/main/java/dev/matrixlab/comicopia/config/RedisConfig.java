@@ -1,4 +1,4 @@
-package dev.matrixlab.comicopia.configuration;
+package dev.matrixlab.comicopia.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

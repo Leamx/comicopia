@@ -1,7 +1,7 @@
 package dev.matrixlab.comicopia.controller.comic;
 
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
-import dev.matrixlab.comicopia.dto.system.CallbackDataDTO;
+import dev.matrixlab.comicopia.dto.system.CallbackData;
 import dev.matrixlab.comicopia.service.comic.ComicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,22 +14,29 @@ public class ComicController {
     private final ComicService comicService;
 
     @PostMapping("/createComic")
-    private CallbackDataDTO createComic(@RequestBody ComicDTO comicDTO) {
-        return CallbackDataDTO.build(true, () -> {
+    private CallbackData createComic(@RequestBody ComicDTO comicDTO) {
+        return CallbackData.build(true, () -> {
             comicService.createComic(comicDTO);
         });
     }
 
-    @PostMapping("/deleteComicById")
-    private CallbackDataDTO deleteComicById(@RequestBody ComicDTO comicDTO) {
-        return CallbackDataDTO.build(true, () -> {
-           comicService.deleteComicById(comicDTO);
+    @DeleteMapping("/deleteComicById")
+    private CallbackData deleteComicById(@RequestParam("comicId") Long comicId) {
+        return CallbackData.build(true, () -> {
+           comicService.deleteComicById(comicId);
+        });
+    }
+
+    @PutMapping("/updateComicById")
+    private CallbackData updateComicById(@RequestBody ComicDTO comicDTO) {
+        return CallbackData.build(true, () -> {
+            comicService.updateComicById(comicDTO);
         });
     }
 
     @GetMapping("/getComicListByName")
-    private CallbackDataDTO getComicListByName(@RequestParam("name") String name) {
-        return CallbackDataDTO.build(true, comicService.getComicListByName(name));
+    private CallbackData getComicListByName(@RequestParam("comicName") String comicName) {
+        return CallbackData.build(true, comicService.getComicListByName(comicName));
     }
 
 }

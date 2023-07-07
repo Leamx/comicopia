@@ -11,9 +11,13 @@ public class ImageDO {
 
     private Long chapterId;
 
-    private Integer imageNum;
+    private Integer imageOrder;
 
     // 0: normal 1: chatper cover 2: comic cover
     private Integer type;
+
+    private Long gmtCreate;
+
+    private Long gmtModified;
 
 }

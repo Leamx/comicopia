@@ -1,4 +1,4 @@
-package dev.matrixlab.comicopia.configuration;
+package dev.matrixlab.comicopia.config;
 
 public final class SystemConstants {
 

@@ -11,4 +11,8 @@ public class CategoryDO {
 
     private String description;
 
+    private Long gmtCreate;
+
+    private Long gmtModified;
+
 }

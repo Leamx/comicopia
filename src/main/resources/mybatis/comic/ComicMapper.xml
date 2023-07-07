@@ -68,6 +68,11 @@
         </where>
     </update>
 
+    <select id="getComicList" resultMap="ComicDTO">
+        select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
+        from co_comic c
+    </select>
+
     <select id="getComicListByName" resultMap="ComicDTO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c

@@ -14,28 +14,28 @@ public class ComicController {
     private final ComicService comicService;
 
     @PostMapping("/createComic")
-    private CallbackData createComic(@RequestBody ComicDTO comicDTO) {
+    public CallbackData createComic(@RequestBody ComicDTO comicDTO) {
         return CallbackData.build(true, () -> {
             comicService.createComic(comicDTO);
         });
     }
 
     @DeleteMapping("/deleteComicById")
-    private CallbackData deleteComicById(@RequestParam("comicId") Long comicId) {
+    public CallbackData deleteComicById(@RequestParam("comicId") Long comicId) {
         return CallbackData.build(true, () -> {
            comicService.deleteComicById(comicId);
         });
     }
 
     @PutMapping("/updateComicById")
-    private CallbackData updateComicById(@RequestBody ComicDTO comicDTO) {
+    public CallbackData updateComicById(@RequestBody ComicDTO comicDTO) {
         return CallbackData.build(true, () -> {
             comicService.updateComicById(comicDTO);
         });
     }
 
     @GetMapping("/getComicListByName")
-    private CallbackData getComicListByName(@RequestParam("comicName") String comicName) {
+    public CallbackData getComicListByName(@RequestParam(value = "comicName", required = false, defaultValue = "") String comicName) {
         return CallbackData.build(true, comicService.getComicListByName(comicName));
     }
 

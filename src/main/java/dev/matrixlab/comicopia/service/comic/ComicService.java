@@ -12,6 +12,6 @@ public interface ComicService {
 
     void updateComicById(ComicDTO comicDTO);
 
-    List<ComicDTO> getComicListByName(String comicName);
+    List<ComicDTO> listComicsByName(String comicName);
 
 }

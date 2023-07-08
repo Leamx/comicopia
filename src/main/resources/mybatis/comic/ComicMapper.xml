@@ -68,24 +68,24 @@
         </where>
     </update>
 
-    <select id="getComicList" resultMap="ComicDTO">
+    <select id="listComic" resultMap="ComicDTO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c
     </select>
 
-    <select id="getComicListByName" resultMap="ComicDTO">
+    <select id="listComicsByName" resultMap="ComicDTO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c
         where c.name like concat('%', #{comicName}, '%')
     </select>
 
-    <select id="nameDuplicateCheck" resultType="java.lang.Integer">
+    <select id="nameDuplicateCheck" resultType="int">
         select count(*)
         from co_comic c
         where c.name = #{comicName}
     </select>
 
-    <select id="checkComicExist" resultType="java.lang.Integer">
+    <select id="checkComicExist" resultType="int">
         select count(*)
         from co_comic c
         where c.id = #{comicId}

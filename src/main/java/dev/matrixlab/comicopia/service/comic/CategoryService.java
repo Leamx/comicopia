@@ -12,6 +12,6 @@ public interface CategoryService {
 
     void updateCategoryById(CategoryDTO categoryDTO);
 
-    List<CategoryDTO> getCategoryListByName(String categoryName);
+    List<CategoryDTO> listCategoriesByName(String categoryName);
 
 }

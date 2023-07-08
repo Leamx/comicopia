@@ -12,6 +12,6 @@ public interface AuthorService {
 
     void updateAuthorById(AuthorDTO authorDTO);
 
-    List<AuthorDTO> getAuthorListByName(String authorName);
+    List<AuthorDTO> listAuthorsByName(String authorName);
 
 }

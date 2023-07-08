@@ -2,9 +2,11 @@ package dev.matrixlab.comicopia.dto.mapper;
 
 import dev.matrixlab.comicopia.dto.comic.AuthorDTO;
 import dev.matrixlab.comicopia.dto.comic.CategoryDTO;
+import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
 import dev.matrixlab.comicopia.entity.comic.AuthorDO;
 import dev.matrixlab.comicopia.entity.comic.CategoryDO;
+import dev.matrixlab.comicopia.entity.comic.ChapterDO;
 import dev.matrixlab.comicopia.entity.comic.ComicDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
@@ -28,5 +30,9 @@ public interface BeanMapperStruct {
     // -------------------------- category -------------------------------------
 
     CategoryDO categoryDTO2CategoryDO(CategoryDTO categoryDTO);
+
+    // -------------------------- chapter -------------------------------------
+
+    ChapterDO chatperInfoDTO2ChapterDO(ChapterInfoDTO chapterInfoDTO);
 
 }

@@ -7,6 +7,8 @@ public class ImageDO {
 
     private Long id;
 
+    private String fileUID;
+
     private Long comicId;
 
     private Long chapterId;
@@ -15,6 +17,12 @@ public class ImageDO {
 
     // 0: normal 1: chatper cover 2: comic cover
     private Integer type;
+
+    private String originalName;
+
+    private String description;
+
+    private String extension;
 
     private Long gmtCreate;
 

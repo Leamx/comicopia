@@ -56,11 +56,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorDTO> getAuthorListByName(String authorName) {
+    public List<AuthorDTO> listAuthorsByName(String authorName) {
         if ("".equals(authorName)) {
-            return authorMapper.getAuthorList();
+            return authorMapper.listAuthors();
         } else {
-            return authorMapper.getAuthorListByName(authorName);
+            return authorMapper.listAuthorsByName(authorName);
         }
     }
 

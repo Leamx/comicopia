@@ -59,11 +59,11 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
-    public List<ComicDTO> getComicListByName(String comicName) {
+    public List<ComicDTO> listComicsByName(String comicName) {
         if ("".equals(comicName)) {
-            return comicMapper.getComicList();
+            return comicMapper.listComic();
         } else {
-            return comicMapper.getComicListByName(comicName);
+            return comicMapper.listComicsByName(comicName);
         }
     }
 

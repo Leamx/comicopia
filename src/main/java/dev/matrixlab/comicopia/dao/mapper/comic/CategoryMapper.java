@@ -20,7 +20,7 @@ public interface CategoryMapper {
 
     int updateCategoryById(CategoryDO categoryDO);
 
-    List<CategoryDTO> getCategoryList();
+    List<CategoryDTO> listCategories();
 
-    List<CategoryDTO> getCategoryListByName(String categoryName);
+    List<CategoryDTO> listCategoriesByName(String categoryName);
 }

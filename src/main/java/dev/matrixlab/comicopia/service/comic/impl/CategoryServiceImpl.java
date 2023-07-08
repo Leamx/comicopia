@@ -57,11 +57,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> getCategoryListByName(String categoryName) {
+    public List<CategoryDTO> listCategoriesByName(String categoryName) {
         if ("".equals(categoryName)) {
-            return categoryMapper.getCategoryList();
+            return categoryMapper.listCategories();
         } else {
-            return categoryMapper.getCategoryListByName(categoryName);
+            return categoryMapper.listCategoriesByName(categoryName);
         }
 
     }

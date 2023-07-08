@@ -10,17 +10,17 @@ import java.util.List;
 @Mapper
 public interface AuthorMapper {
 
-    Integer insertAuthor(AuthorDO authorDO);
+    int insertAuthor(AuthorDO authorDO);
 
-    Integer deleteAuthorById(@Param("authorId") Long authorId);
+    int deleteAuthorById(@Param("authorId") Long authorId);
 
-    Integer nameDuplicateCheck(String authorName);
+    int nameDuplicateCheck(String authorName);
 
-    Integer checkAuthorExistById(@Param("authorId") Integer authorId);
+    int checkAuthorExistById(@Param("authorId") Integer authorId);
 
-    Integer updateAuthorById(AuthorDO authorDO);
+    int updateAuthorById(AuthorDO authorDO);
 
-    List<AuthorDTO> getAuthorList();
+    List<AuthorDTO> listAuthors();
 
-    List<AuthorDTO> getAuthorListByName(@Param("authorName") String authorName);
+    List<AuthorDTO> listAuthorsByName(@Param("authorName") String authorName);
 }

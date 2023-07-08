@@ -10,17 +10,17 @@ import java.util.List;
 @Mapper
 public interface ComicMapper {
 
-    Integer insertComic(ComicDO comicDO);
+    int insertComic(ComicDO comicDO);
 
-    Integer deleteComicById(@Param("comicId") Long comicId);
+    int deleteComicById(@Param("comicId") Long comicId);
 
-    Integer updateComicById(ComicDO comicDO);
+    int updateComicById(ComicDO comicDO);
 
-    List<ComicDTO> getComicList();
+    List<ComicDTO> listComic();
 
-    List<ComicDTO> getComicListByName(@Param("comicName") String comicName);
+    List<ComicDTO> listComicsByName(@Param("comicName") String comicName);
 
-    Integer nameDuplicateCheck(@Param("comicName") String comicName);
+    int nameDuplicateCheck(@Param("comicName") String comicName);
 
-    Integer checkComicExistById(@Param("comicId") Long comicId);
+    int checkComicExistById(@Param("comicId") Long comicId);
 }

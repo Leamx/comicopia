@@ -18,6 +18,52 @@
         <result column="description" jdbcType="VARCHAR" property="description"/>
     </resultMap>
 
+    <insert id="insertCategory" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO" useGeneratedKeys="true" keyProperty="id">
+        insert into co_category (id, name, description, gmt_create, gmt_modified)
+        values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
+    </insert>
+
+    <select id="nameDuplicateCheck" resultType="int">
+        select count(*) from co_category where name = #{categoryName}
+    </select>
+
+    <delete id="deleteCategoryById">
+        delete from co_category where id = #{categoryId}
+    </delete>
+
+    <select id="checkCategoryExistById" resultType="int">
+        select count(*) from co_category where id = #{categoryId}
+    </select>
+
+    <update id="updateCategoryById" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO">
+        update co_category c
+        <set>
+            <if test="name != null">
+                c.name = #{name},
+            </if>
+            <if test="description != null">
+                c.description = #{description},
+            </if>
+            <if test="gmtModified != null">
+                c.gmt_modified = #{gmtModified},
+            </if>
+        </set>
+        <where>
+            c.id = #{id}
+        </where>
+    </update>
+
+    <select id="listCategories" resultMap="CategoryDTO">
+        select c.id, c.name, c.description from co_category c order by c.gmt_create desc
+    </select>
+
+    <select id="listCategoriesByName" resultMap="CategoryDTO">
+        select c.id, c.name, c.description
+        from co_category c
+        where c.name like concat('%', #{categoryName}, '%')
+        order by c.gmt_create desc
+    </select>
+
 
 
 </mapper>

@@ -34,9 +34,9 @@ public class AuthorController {
         });
     }
 
-    @GetMapping("/getAuthorListByName")
+    @GetMapping("/listAuthorsByName")
     public CallbackData getAuthorListByName(@RequestParam(value = "authorName", required = false, defaultValue = "") String authorName) {
-        return CallbackData.build(true, authorService.getAuthorListByName(authorName));
+        return CallbackData.build(true, authorService.listAuthorsByName(authorName));
     }
 
 }

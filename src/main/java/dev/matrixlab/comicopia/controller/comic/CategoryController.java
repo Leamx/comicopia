@@ -36,7 +36,7 @@ public class CategoryController {
 
     @GetMapping("/getCategoryListByName")
     public CallbackData getCategoryListByName(@RequestParam("categoryName") String categoryName) {
-        return CallbackData.build(true, categoryService.getCategoryListByName(categoryName));
+        return CallbackData.build(true, categoryService.listCategoriesByName(categoryName));
     }
 
 }

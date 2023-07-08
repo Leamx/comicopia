@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.ChapterMapper">
+    
+    <resultMap id="ChapterDO" type="dev.matrixlab.comicopia.entity.comic.ChapterDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="chapter_order" jdbcType="INTEGER" property="chapterOrder"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="ChapterInfoDTO" type="dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="chapter_order" jdbcType="INTEGER" property="chapterOrder"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="checkChapterExistByComicIdAndChapterOrder" resultType="int">
+        select count(*)
+        from co_chapter
+        where comic_id = #{comicId} and chapter_order = #{chapterOrder}
+    </select>
+
+    <insert id="insertChapter" parameterType="dev.matrixlab.comicopia.entity.comic.ChapterDO" useGeneratedKeys="true" keyProperty="id">
+        insert into co_chapter(id, comic_id, title, sub_title, chapter_order, gmt_create, gmt_modified)
+        values(#{id, jdbcType=BIGINT}, #{comicId, jdbcType=BIGINT}, #{title, jdbcType=VARCHAR}, #{subTitle, jdbcType=VARCHAR}, #{chapterOrder, jdbcType=INTEGER}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
+    </insert>
+
+    <delete id="deleteChapterById">
+        delete from co_chapter where id = #{chapterId}
+    </delete>
+
+    <select id="checkChapterExistByChapterId" resultType="int">
+        select count(*) from co_chapter where id = #{id}
+    </select>
+
+    <update id="updateChapterById">
+        update co_chapter c
+        <set>
+            <if test="title != null">
+                c.title = #{title},
+            </if>
+            <if test="subTitle != null">
+                c.sub_title = #{subTitle},
+            </if>
+            <if test="chapterOrder != null">
+                c.chapter_order = #{chapterOrder},
+            </if>
+            <if test="gmtModified != null">
+                c.gmt_modified = #{gmtModified},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="listChaptersByComicId" resultMap="ChapterInfoDTO">
+        select c.id, c.comic_id, c.title, c.sub_title, c.chapter_order, c.gmt_create
+        from co_chapter c
+        where c.comic_id = #{comicId}
+        order by chapter_order asc
+    </select>
+
+</mapper>

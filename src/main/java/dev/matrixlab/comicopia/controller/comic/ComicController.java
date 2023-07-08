@@ -36,7 +36,7 @@ public class ComicController {
 
     @GetMapping("/getComicListByName")
     public CallbackData getComicListByName(@RequestParam(value = "comicName", required = false, defaultValue = "") String comicName) {
-        return CallbackData.build(true, comicService.getComicListByName(comicName));
+        return CallbackData.build(true, comicService.listComicsByName(comicName));
     }
 
 }

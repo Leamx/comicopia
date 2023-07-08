@@ -1,6 +1,6 @@
 package dev.matrixlab.comicopia.config;
 
-public final class SystemConstants {
+public final class SystemConfigConsts {
 
     public static final String SYSTEM_NAME = "Comicopia";
 

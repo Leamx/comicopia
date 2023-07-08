@@ -30,11 +30,11 @@
         delete from co_author where id = #{authorId}
     </delete>
 
-    <select id="nameDuplicateCheck" resultType="java.lang.Integer">
+    <select id="nameDuplicateCheck" resultType="int">
         select count(*) from co_author where name = #{authorName}
     </select>
 
-    <select id="checkAuthorExistById" resultType="java.lang.Integer">
+    <select id="checkAuthorExistById" resultType="int">
         select count(*) from co_author where id = #{authorId}
     </select>
 
@@ -59,13 +59,12 @@
         </where>
     </update>
 
-<!--    List<AuthorDTO> getAuthorList();-->
-    <select id="getAuthorList" resultMap="AuthorDTO">
+    <select id="listAuthors" resultMap="AuthorDTO">
         select a.id, a.name, a.bio, a.avatar
         from co_author a
     </select>
 
-    <select id="getAuthorListByName" resultMap="AuthorDTO">
+    <select id="listAuthorsByName" resultMap="AuthorDTO">
         select a.id, a.name, a.bio, a.avatar
         from co_author a
         where name like concat('%', #{authorName}, '%')

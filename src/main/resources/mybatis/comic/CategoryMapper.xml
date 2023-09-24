@@ -12,7 +12,7 @@
         <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
     </resultMap>
 
-    <resultMap id="CategoryDTO" type="dev.matrixlab.comicopia.dto.comic.CategoryDTO">
+    <resultMap id="CategoryVO" type="dev.matrixlab.comicopia.vo.comic.CategoryVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -28,11 +28,11 @@
     </select>
 
     <delete id="deleteCategoryById">
-        delete from co_category where id = #{categoryId}
+        delete from co_category where id = #{id}
     </delete>
 
     <select id="checkCategoryExistById" resultType="int">
-        select count(*) from co_category where id = #{categoryId}
+        select count(*) from co_category where id = #{id}
     </select>
 
     <update id="updateCategoryById" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO">
@@ -53,11 +53,13 @@
         </where>
     </update>
 
-    <select id="listCategories" resultMap="CategoryDTO">
-        select c.id, c.name, c.description from co_category c order by c.gmt_create desc
+    <select id="listCategories" resultMap="CategoryVO">
+        select c.id, c.name, c.description
+        from co_category c
+        order by c.gmt_create desc
     </select>
 
-    <select id="listCategoriesByName" resultMap="CategoryDTO">
+    <select id="listCategoriesByName" resultMap="CategoryVO">
         select c.id, c.name, c.description
         from co_category c
         where c.name like concat('%', #{categoryName}, '%')

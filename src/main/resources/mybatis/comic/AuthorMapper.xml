@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapper">
+<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapperTests">
 
     <resultMap id="AuthorDO" type="dev.matrixlab.comicopia.entity.comic.AuthorDO">
         <id column="id" jdbcType="BIGINT" property="id"/>
@@ -13,7 +13,7 @@
         <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
     </resultMap>
 
-    <resultMap id="AuthorDTO" type="dev.matrixlab.comicopia.dto.comic.AuthorDTO">
+    <resultMap id="AuthorVO" type="dev.matrixlab.comicopia.vo.comic.AuthorVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="bio" jdbcType="VARCHAR" property="bio"/>
@@ -27,7 +27,7 @@
     </insert>
 
     <delete id="deleteAuthorById">
-        delete from co_author where id = #{authorId}
+        delete from co_author where id = #{id}
     </delete>
 
     <select id="nameDuplicateCheck" resultType="int">
@@ -35,7 +35,7 @@
     </select>
 
     <select id="checkAuthorExistById" resultType="int">
-        select count(*) from co_author where id = #{authorId}
+        select count(*) from co_author where id = #{id}
     </select>
 
     <update id="updateAuthorById" parameterType="dev.matrixlab.comicopia.entity.comic.AuthorDO">
@@ -55,16 +55,16 @@
             </if>
         </set>
         <where>
-            a.id = #{id}
+            a.id = #{authorId}
         </where>
     </update>
 
-    <select id="listAuthors" resultMap="AuthorDTO">
+    <select id="listAuthors" resultMap="AuthorVO">
         select a.id, a.name, a.bio, a.avatar
         from co_author a
     </select>
 
-    <select id="listAuthorsByName" resultMap="AuthorDTO">
+    <select id="listAuthorsByName" resultMap="AuthorVO">
         select a.id, a.name, a.bio, a.avatar
         from co_author a
         where name like concat('%', #{authorName}, '%')

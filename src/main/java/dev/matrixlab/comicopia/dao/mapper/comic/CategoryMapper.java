@@ -1,7 +1,7 @@
 package dev.matrixlab.comicopia.dao.mapper.comic;
 
-import dev.matrixlab.comicopia.dto.comic.CategoryDTO;
 import dev.matrixlab.comicopia.entity.comic.CategoryDO;
+import dev.matrixlab.comicopia.vo.comic.CategoryVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,13 +14,13 @@ public interface CategoryMapper {
 
     Integer nameDuplicateCheck(@Param("categoryName") String categoryName);
 
-    int deleteCategoryById(Long categoryId);
+    int deleteCategoryById(@Param("id") Long id);
 
-    int checkCategoryExistById(Integer id);
+    int checkCategoryExistById(@Param("id") Integer id);
 
     int updateCategoryById(CategoryDO categoryDO);
 
-    List<CategoryDTO> listCategories();
+    List<CategoryVO> listCategories();
 
-    List<CategoryDTO> listCategoriesByName(String categoryName);
+    List<CategoryVO> listCategoriesByName(@Param("categoryName") String categoryName);
 }

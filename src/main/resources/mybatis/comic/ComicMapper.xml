@@ -16,7 +16,7 @@
         <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
     </resultMap>
 
-    <resultMap id="ComicDTO" type="dev.matrixlab.comicopia.dto.comic.ComicDTO">
+    <resultMap id="ComicVO" type="dev.matrixlab.comicopia.vo.comic.ComicVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -35,7 +35,7 @@
     </insert>
 
     <delete id="deleteComicById">
-        delete from co_comic where id = #{comicId}
+        delete from co_comic where id = #{id}
     </delete>
 
     <update id="updateComicById" parameterType="dev.matrixlab.comicopia.entity.comic.ComicDO">
@@ -68,12 +68,12 @@
         </where>
     </update>
 
-    <select id="listComic" resultMap="ComicDTO">
+    <select id="listComics" resultMap="ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c
     </select>
 
-    <select id="listComicsByName" resultMap="ComicDTO">
+    <select id="listComicsByName" resultMap="ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c
         where c.name like concat('%', #{comicName}, '%')
@@ -85,10 +85,10 @@
         where c.name = #{comicName}
     </select>
 
-    <select id="checkComicExist" resultType="int">
+    <select id="checkComicExistById" resultType="int">
         select count(*)
         from co_comic c
-        where c.id = #{comicId}
+        where c.id = #{id}
     </select>
 
 </mapper>

@@ -1,7 +1,7 @@
 package dev.matrixlab.comicopia.dao.mapper.comic;
 
-import dev.matrixlab.comicopia.dto.comic.AuthorDTO;
 import dev.matrixlab.comicopia.entity.comic.AuthorDO;
+import dev.matrixlab.comicopia.vo.comic.AuthorVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,15 +12,15 @@ public interface AuthorMapper {
 
     int insertAuthor(AuthorDO authorDO);
 
-    int deleteAuthorById(@Param("authorId") Long authorId);
+    int deleteAuthorById(@Param("id") Long id);
 
-    int nameDuplicateCheck(String authorName);
+    int nameDuplicateCheck(@Param("authorName") String authorName);
 
-    int checkAuthorExistById(@Param("authorId") Integer authorId);
+    int checkAuthorExistById(@Param("id") Integer id);
 
     int updateAuthorById(AuthorDO authorDO);
 
-    List<AuthorDTO> listAuthors();
+    List<AuthorVO> listAuthors();
 
-    List<AuthorDTO> listAuthorsByName(@Param("authorName") String authorName);
+    List<AuthorVO> listAuthorsByName(@Param("authorName") String authorName);
 }

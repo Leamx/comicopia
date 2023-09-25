@@ -1,42 +1,42 @@
 package dev.matrixlab.comicopia.controller.comic;
 
 import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
-import dev.matrixlab.comicopia.dto.system.CallbackData;
+import dev.matrixlab.comicopia.entity.system.CallbackData;
 import dev.matrixlab.comicopia.service.comic.ChapterService;
-import lombok.RequiredArgsConstructor;
+import dev.matrixlab.comicopia.utils.CallbackUtils;
+import dev.matrixlab.comicopia.vo.comic.ChapterInfoVO;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/chapter")
-@RequiredArgsConstructor
 public class ChapterController {
 
     private final ChapterService chapterService;
 
-    @PostMapping("/createChapter")
-    public CallbackData createChapter(@RequestBody ChapterInfoDTO chapterInfoDTO) {
-        return CallbackData.build(true, () -> {
-            chapterService.createChapter(chapterInfoDTO);
-        });
+    public ChapterController(final ChapterService chapterService) {
+        this.chapterService = chapterService;
+    }
+
+    @PostMapping("/addChapter")
+    public CallbackData<String> addChapter(@RequestBody ChapterInfoDTO chapterInfoDTO) {
+        return CallbackUtils.success(chapterService.saveChapter(chapterInfoDTO));
     }
 
     @DeleteMapping("/deleteChapterById")
-    public CallbackData deleteChapterById(@RequestParam("chapterId") Long chapterId) {
-        return CallbackData.build(true, () -> {
-            chapterService.deleteChapterById(chapterId);
-        });
+    public CallbackData<String> deleteChapterById(@RequestParam("chapterId") Long chapterId) {
+        return CallbackUtils.success(chapterService.removeChapterById(chapterId));
     }
 
-    @PutMapping("/updateChapterById")
-    public CallbackData updateChapterById(@RequestBody ChapterInfoDTO chapterInfoDTO) {
-        return CallbackData.build(true, () -> {
-            chapterService.updateChapterInfoById(chapterInfoDTO);
-        });
+    @PutMapping("/modifyChapterById")
+    public CallbackData<String> modifyChapterById(@RequestBody ChapterInfoDTO chapterInfoDTO) {
+        return CallbackUtils.success(chapterService.updateChapterInfoById(chapterInfoDTO));
     }
 
-    @GetMapping("/getChapterListByComicId")
-    public CallbackData getChapterListByComicId(@RequestParam("comicId") Long comicId) {
-        return CallbackData.build(true, chapterService.listChaptersByComicId(comicId));
+    @GetMapping("/queryChaptersByComicId")
+    public CallbackData<List<ChapterInfoVO>> getChaptersByComicId(@RequestParam("comicId") Long comicId) {
+        return CallbackUtils.success(chapterService.listChaptersByComicId(comicId));
     }
 
 }

@@ -30,11 +30,11 @@
         delete from co_author where id = #{id}
     </delete>
 
-    <select id="nameDuplicateCheck" resultType="int">
+    <select id="countAuthorsByName" resultType="int">
         select count(*) from co_author where name = #{authorName}
     </select>
 
-    <select id="checkAuthorExistById" resultType="int">
+    <select id="countAuthorsById" resultType="int">
         select count(*) from co_author where id = #{id}
     </select>
 
@@ -59,12 +59,12 @@
         </where>
     </update>
 
-    <select id="listAuthors" resultMap="AuthorVO">
+    <select id="selectAuthors" resultMap="AuthorVO">
         select a.id, a.name, a.bio, a.avatar
         from co_author a
     </select>
 
-    <select id="listAuthorsByName" resultMap="AuthorVO">
+    <select id="selectAuthorsByName" resultMap="AuthorVO">
         select a.id, a.name, a.bio, a.avatar
         from co_author a
         where name like concat('%', #{authorName}, '%')

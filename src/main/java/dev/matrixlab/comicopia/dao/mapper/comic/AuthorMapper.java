@@ -14,13 +14,13 @@ public interface AuthorMapper {
 
     int deleteAuthorById(@Param("id") Long id);
 
-    int nameDuplicateCheck(@Param("authorName") String authorName);
+    int countAuthorsByName(@Param("authorName") String authorName);
 
-    int checkAuthorExistById(@Param("id") Integer id);
+    int countAuthorsById(@Param("id") Integer id);
 
     int updateAuthorById(AuthorDO authorDO);
 
-    List<AuthorVO> listAuthors();
+    List<AuthorVO> selectAuthors();
 
-    List<AuthorVO> listAuthorsByName(@Param("authorName") String authorName);
+    List<AuthorVO> selectAuthorsByName(@Param("authorName") String authorName);
 }

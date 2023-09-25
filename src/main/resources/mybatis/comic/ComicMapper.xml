@@ -68,24 +68,24 @@
         </where>
     </update>
 
-    <select id="listComics" resultMap="ComicVO">
+    <select id="selectComics" resultMap="ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c
     </select>
 
-    <select id="listComicsByName" resultMap="ComicVO">
+    <select id="selectComicsByName" resultMap="ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from co_comic c
         where c.name like concat('%', #{comicName}, '%')
     </select>
 
-    <select id="nameDuplicateCheck" resultType="int">
+    <select id="countComicsByName" resultType="int">
         select count(*)
         from co_comic c
         where c.name = #{comicName}
     </select>
 
-    <select id="checkComicExistById" resultType="int">
+    <select id="countComicsById" resultType="int">
         select count(*)
         from co_comic c
         where c.id = #{id}

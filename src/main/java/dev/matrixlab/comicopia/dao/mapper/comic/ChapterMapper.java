@@ -10,15 +10,15 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper {
 
-    int checkChapterExistByComicIdAndChapterOrder(@Param("comicId") Long comicId, @Param("chapterOrder") Integer chapterOrder);
+    int countChapterByChapterOrder(@Param("comicId") Long comicId, @Param("chapterOrder") Integer chapterOrder);
 
     int insertChapter(ChapterDO chapterDO);
 
     int deleteChapterById(@Param("id") Long id);
 
-    int checkChapterExistById(@Param("id") Long id);
+    int countChaptersById(@Param("id") Long id);
 
     int updateChapterById(ChapterDO chapterDO);
 
-    List<ChapterInfoVO> listChaptersByComicId(@Param("comicId") Long comicId);
+    List<ChapterInfoVO> selectChaptersByComicId(@Param("comicId") Long comicId);
 }

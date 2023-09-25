@@ -22,7 +22,7 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public String saveComic(ComicDTO comicDTO) {
-        if (comicMapper.nameDuplicateCheck(comicDTO.getName()) > 0) {
+        if (comicMapper.countComicsByName(comicDTO.getName()) > 0) {
             throw new InternalException("The comic name is duplicated, creating a comic failed.");
         }
         ComicDO comicDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.comicDTO2ComicDO(comicDTO);
@@ -48,7 +48,7 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public String updateComicById(ComicDTO comicDTO) {
-        if (comicMapper.checkComicExistById(comicDTO.getId()) == 0) {
+        if (comicMapper.countComicsById(comicDTO.getId()) == 0) {
             throw new InternalException("Comic does not exist.");
         }
         ComicDO comicDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.comicDTO2ComicDO(comicDTO);
@@ -63,9 +63,9 @@ public class ComicServiceImpl implements ComicService {
     @Override
     public List<ComicVO> listComicsByName(String comicName) {
         if ("".equals(comicName)) {
-            return comicMapper.listComics();
+            return comicMapper.selectComics();
         } else {
-            return comicMapper.listComicsByName(comicName);
+            return comicMapper.selectComicsByName(comicName);
         }
     }
 

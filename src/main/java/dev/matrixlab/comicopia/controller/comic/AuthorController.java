@@ -24,8 +24,8 @@ public class AuthorController {
      * @param authorDTO 必填字段 name
      * @return 创建成功与否
      */
-    @PostMapping("/saveAuthor")
-    public CallbackData<String> saveAuthor(@RequestBody AuthorDTO authorDTO) {
+    @PostMapping("/addAuthor")
+    public CallbackData<String> addAuthor(@RequestBody AuthorDTO authorDTO) {
         return CallbackUtils.success(authorService.saveAuthor(authorDTO));
     }
 
@@ -34,13 +34,13 @@ public class AuthorController {
         return CallbackUtils.success(authorService.removeAuthorById(authorId));
     }
 
-    @PutMapping("/updateAuthorById")
-    public CallbackData<String> updateAuthorById(@RequestBody AuthorDTO authorDTO) {
+    @PutMapping("/modifyAuthorById")
+    public CallbackData<String> modifyAuthorById(@RequestBody AuthorDTO authorDTO) {
         return CallbackUtils.success(authorService.updateAuthorById(authorDTO));
     }
 
-    @GetMapping("/listAuthorsByName")
-    public CallbackData<List<AuthorVO>> getAuthorListByName(@RequestParam(value = "authorName", required = false, defaultValue = "") String authorName) {
+    @GetMapping("/queryAuthorsByName")
+    public CallbackData<List<AuthorVO>> queryAuthorsByName(@RequestParam(value = "authorName", required = false, defaultValue = "") String authorName) {
         return CallbackUtils.success(authorService.listAuthorsByName(authorName));
     }
 

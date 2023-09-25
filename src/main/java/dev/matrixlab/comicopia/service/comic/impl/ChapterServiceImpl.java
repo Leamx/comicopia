@@ -22,7 +22,7 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public String saveChapter(ChapterInfoDTO chapterInfoDTO) {
-        if (chapterMapper.checkChapterExistByComicIdAndChapterOrder(chapterInfoDTO.getComicId(), chapterInfoDTO.getChapterOrder()) > 0) {
+        if (chapterMapper.countChapterByChapterOrder(chapterInfoDTO.getComicId(), chapterInfoDTO.getChapterOrder()) > 0) {
             throw new InternalException("The chapter order is duplicated, creating a chapter failed.");
         }
         ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperInfoDTO2ChapterDO(chapterInfoDTO);
@@ -45,7 +45,7 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public String updateChapterInfoById(ChapterInfoDTO chapterInfoDTO) {
-        if (chapterMapper.checkChapterExistById(chapterInfoDTO.getId()) > 0) {
+        if (chapterMapper.countChaptersById(chapterInfoDTO.getId()) > 0) {
             throw new InternalException("The chapter order is duplicated, creating a chapter failed.");
         }
         ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperInfoDTO2ChapterDO(chapterInfoDTO);
@@ -59,6 +59,6 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public List<ChapterInfoVO> listChaptersByComicId(Long comicId) {
-        return chapterMapper.listChaptersByComicId(comicId);
+        return chapterMapper.selectChaptersByComicId(comicId);
     }
 }

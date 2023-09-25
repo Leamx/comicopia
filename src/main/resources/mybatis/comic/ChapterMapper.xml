@@ -23,7 +23,7 @@
         <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
     </resultMap>
 
-    <select id="checkChapterExistByComicIdAndChapterOrder" resultType="int">
+    <select id="countChapterByChapterOrder" resultType="int">
         select count(*)
         from co_chapter
         where comic_id = #{comicId} and chapter_order = #{chapterOrder}
@@ -38,7 +38,7 @@
         delete from co_chapter where id = #{id}
     </delete>
 
-    <select id="checkChapterExistById" resultType="int">
+    <select id="countChaptersById" resultType="int">
         select count(*) from co_chapter where id = #{id}
     </select>
 
@@ -63,7 +63,7 @@
         </where>
     </update>
 
-    <select id="listChaptersByComicId" resultMap="ChapterInfoVO">
+    <select id="selectChaptersByComicId" resultMap="ChapterInfoVO">
         select c.id, c.comic_id, c.title, c.sub_title, c.chapter_order, c.gmt_create
         from co_chapter c
         where c.comic_id = #{comicId}

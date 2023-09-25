@@ -16,11 +16,11 @@ public interface ComicMapper {
 
     int updateComicById(ComicDO comicDO);
 
-    List<ComicVO> listComics();
+    List<ComicVO> selectComics();
 
-    List<ComicVO> listComicsByName(@Param("comicName") String comicName);
+    List<ComicVO> selectComicsByName(@Param("comicName") String comicName);
 
-    int nameDuplicateCheck(@Param("comicName") String comicName);
+    int countComicsByName(@Param("comicName") String comicName);
 
-    int checkComicExistById(@Param("id") Long id);
+    int countComicsById(@Param("id") Long id);
 }

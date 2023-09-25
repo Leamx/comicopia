@@ -23,7 +23,7 @@
         values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
     </insert>
 
-    <select id="nameDuplicateCheck" resultType="int">
+    <select id="countCategoriesByName" resultType="int">
         select count(*) from co_category where name = #{categoryName}
     </select>
 
@@ -31,7 +31,7 @@
         delete from co_category where id = #{id}
     </delete>
 
-    <select id="checkCategoryExistById" resultType="int">
+    <select id="countCategoriesById" resultType="int">
         select count(*) from co_category where id = #{id}
     </select>
 
@@ -53,13 +53,13 @@
         </where>
     </update>
 
-    <select id="listCategories" resultMap="CategoryVO">
+    <select id="selectCategories" resultMap="CategoryVO">
         select c.id, c.name, c.description
         from co_category c
         order by c.gmt_create desc
     </select>
 
-    <select id="listCategoriesByName" resultMap="CategoryVO">
+    <select id="selectCategoriesByName" resultMap="CategoryVO">
         select c.id, c.name, c.description
         from co_category c
         where c.name like concat('%', #{categoryName}, '%')

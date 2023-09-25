@@ -26,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public String saveAuthor(AuthorDTO authorDTO) {
-        if (authorMapper.nameDuplicateCheck(authorDTO.getName()) > 0) {
+        if (authorMapper.countAuthorsByName(authorDTO.getName()) > 0) {
             throw new InternalException("The author name is duplicated, creating a author failed.");
         }
         AuthorDO authorDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.authorDTO2AuthorDO(authorDTO);
@@ -49,13 +49,12 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public String updateAuthorById(AuthorDTO authorDTO) {
-        if (authorMapper.checkAuthorExistById(authorDTO.getId()) == 0) {
+        if (authorMapper.countAuthorsById(authorDTO.getId()) == 0) {
             throw new InternalException("Author does not exist.");
         }
         AuthorDO authorDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.authorDTO2AuthorDO(authorDTO);
         Long now = System.currentTimeMillis();
         authorDO.setGmtModified(now);
-        logger.info(authorDO.toString());
         if (authorMapper.updateAuthorById(authorDO) == 0) {
             throw new InternalException("Update failed.");
         }
@@ -65,9 +64,9 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<AuthorVO> listAuthorsByName(String authorName) {
         if ("".equals(authorName)) {
-            return authorMapper.listAuthors();
+            return authorMapper.selectAuthors();
         } else {
-            return authorMapper.listAuthorsByName(authorName);
+            return authorMapper.selectAuthorsByName(authorName);
         }
     }
 

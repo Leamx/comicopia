@@ -5,7 +5,7 @@ import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
 import dev.matrixlab.comicopia.entity.comic.ChapterDO;
 import dev.matrixlab.comicopia.service.comic.ChapterService;
-import dev.matrixlab.comicopia.vo.comic.ChapterInfoVO;
+import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +58,7 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public List<ChapterInfoVO> listChaptersByComicId(Long comicId) {
+    public List<ChapterVO> listChaptersByComicId(Long comicId) {
         return chapterMapper.selectChaptersByComicId(comicId);
     }
 }

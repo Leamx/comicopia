@@ -1,7 +1,7 @@
 package dev.matrixlab.comicopia.dao.mapper.comic;
 
 import dev.matrixlab.comicopia.entity.comic.ChapterDO;
-import dev.matrixlab.comicopia.vo.comic.ChapterInfoVO;
+import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +20,5 @@ public interface ChapterMapper {
 
     int updateChapterById(ChapterDO chapterDO);
 
-    List<ChapterInfoVO> selectChaptersByComicId(@Param("comicId") Long comicId);
+    List<ChapterVO> selectChaptersByComicId(@Param("comicId") Long comicId);
 }

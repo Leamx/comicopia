@@ -2,7 +2,7 @@ package dev.matrixlab.comicopia.vo.comic;
 
 import java.io.Serializable;
 
-public class ChapterInfoVO implements Serializable {
+public class ChapterVO implements Serializable {
 
     private static final long serialVersionUID = -5265178301958953468L;
 

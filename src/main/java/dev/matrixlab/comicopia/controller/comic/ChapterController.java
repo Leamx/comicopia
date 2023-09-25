@@ -4,7 +4,7 @@ import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
 import dev.matrixlab.comicopia.entity.system.CallbackData;
 import dev.matrixlab.comicopia.service.comic.ChapterService;
 import dev.matrixlab.comicopia.utils.CallbackUtils;
-import dev.matrixlab.comicopia.vo.comic.ChapterInfoVO;
+import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class ChapterController {
     }
 
     @GetMapping("/queryChaptersByComicId")
-    public CallbackData<List<ChapterInfoVO>> getChaptersByComicId(@RequestParam("comicId") Long comicId) {
+    public CallbackData<List<ChapterVO>> getChaptersByComicId(@RequestParam("comicId") Long comicId) {
         return CallbackUtils.success(chapterService.listChaptersByComicId(comicId));
     }
 

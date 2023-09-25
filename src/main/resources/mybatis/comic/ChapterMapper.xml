@@ -14,7 +14,7 @@
         <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
     </resultMap>
 
-    <resultMap id="ChapterInfoVO" type="dev.matrixlab.comicopia.vo.comic.ChapterInfoVO">
+    <resultMap id="ChapterVO" type="dev.matrixlab.comicopia.vo.comic.ChapterVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
@@ -63,7 +63,7 @@
         </where>
     </update>
 
-    <select id="selectChaptersByComicId" resultMap="ChapterInfoVO">
+    <select id="selectChaptersByComicId" resultMap="ChapterVO">
         select c.id, c.comic_id, c.title, c.sub_title, c.chapter_order, c.gmt_create
         from co_chapter c
         where c.comic_id = #{comicId}

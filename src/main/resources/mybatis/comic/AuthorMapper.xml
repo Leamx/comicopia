@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapperTests">
+<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapper">
 
     <resultMap id="AuthorDO" type="dev.matrixlab.comicopia.entity.comic.AuthorDO">
         <id column="id" jdbcType="BIGINT" property="id"/>
@@ -55,7 +55,7 @@
             </if>
         </set>
         <where>
-            a.id = #{authorId}
+            a.id = #{id}
         </where>
     </update>
 

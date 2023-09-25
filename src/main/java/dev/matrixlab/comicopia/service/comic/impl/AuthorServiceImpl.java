@@ -7,6 +7,8 @@ import dev.matrixlab.comicopia.entity.comic.AuthorDO;
 import dev.matrixlab.comicopia.service.comic.AuthorService;
 import dev.matrixlab.comicopia.vo.comic.AuthorVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorMapper authorMapper;
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthorServiceImpl.class);
 
     public AuthorServiceImpl(final AuthorMapper authorMapper) {
         this.authorMapper = authorMapper;
@@ -51,6 +55,7 @@ public class AuthorServiceImpl implements AuthorService {
         AuthorDO authorDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.authorDTO2AuthorDO(authorDTO);
         Long now = System.currentTimeMillis();
         authorDO.setGmtModified(now);
+        logger.info(authorDO.toString());
         if (authorMapper.updateAuthorById(authorDO) == 0) {
             throw new InternalException("Update failed.");
         }

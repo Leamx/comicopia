@@ -1,16 +1,17 @@
 package dev.matrixlab.comicopia.service.comic;
 
 import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
+import dev.matrixlab.comicopia.vo.comic.ChapterInfoVO;
 
 import java.util.List;
 
 public interface ChapterService {
 
-    void createChapter(ChapterInfoDTO chapterInfoDTO);
+    String saveChapter(ChapterInfoDTO chapterInfoDTO);
 
-    void deleteChapterById(Long chapterId);
+    String removeChapterById(Long chapterId);
 
-    void updateChapterInfoById(ChapterInfoDTO chapterInfoDTO);
+    String updateChapterInfoById(ChapterInfoDTO chapterInfoDTO);
 
-    List<ChapterInfoDTO> listChaptersByComicId(Long comicId);
+    List<ChapterInfoVO> listChaptersByComicId(Long comicId);
 }

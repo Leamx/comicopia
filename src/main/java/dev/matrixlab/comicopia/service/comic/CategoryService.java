@@ -1,17 +1,18 @@
 package dev.matrixlab.comicopia.service.comic;
 
 import dev.matrixlab.comicopia.dto.comic.CategoryDTO;
+import dev.matrixlab.comicopia.vo.comic.CategoryVO;
 
 import java.util.List;
 
 public interface CategoryService {
     
-    void createCategory(CategoryDTO categoryDTO);
+    String saveCategory(CategoryDTO categoryDTO);
 
-    void deleteCategoryById(Long categoryId);
+    String removeCategoryById(Long categoryId);
 
-    void updateCategoryById(CategoryDTO categoryDTO);
+    String updateCategoryById(CategoryDTO categoryDTO);
 
-    List<CategoryDTO> listCategoriesByName(String categoryName);
+    List<CategoryVO> listCategoriesByName(String categoryName);
 
 }

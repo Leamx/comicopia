@@ -1,17 +1,18 @@
 package dev.matrixlab.comicopia.service.comic;
 
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
+import dev.matrixlab.comicopia.vo.comic.ComicVO;
 
 import java.util.List;
 
 public interface ComicService {
 
-    void createComic(ComicDTO comicDTO);
+    String saveComic(ComicDTO comicDTO);
 
-    void deleteComicById(Long comicId);
+    String removeComicById(Long comicId);
 
-    void updateComicById(ComicDTO comicDTO);
+    String updateComicById(ComicDTO comicDTO);
 
-    List<ComicDTO> listComicsByName(String comicName);
+    List<ComicVO> listComicsByName(String comicName);
 
 }

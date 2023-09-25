@@ -1,17 +1,18 @@
 package dev.matrixlab.comicopia.service.comic;
 
 import dev.matrixlab.comicopia.dto.comic.AuthorDTO;
+import dev.matrixlab.comicopia.vo.comic.AuthorVO;
 
 import java.util.List;
 
 public interface AuthorService {
 
-    void createAuthor(AuthorDTO authorDTO);
+    String saveAuthor(AuthorDTO authorDTO);
 
-    void deleteAuthorById(Long authorId);
+    String removeAuthorById(Long authorId);
 
-    void updateAuthorById(AuthorDTO authorDTO);
+    String updateAuthorById(AuthorDTO authorDTO);
 
-    List<AuthorDTO> listAuthorsByName(String authorName);
+    List<AuthorVO> listAuthorsByName(String authorName);
 
 }

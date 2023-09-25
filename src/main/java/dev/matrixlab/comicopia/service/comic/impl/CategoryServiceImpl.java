@@ -3,23 +3,25 @@ package dev.matrixlab.comicopia.service.comic.impl;
 import dev.matrixlab.comicopia.dao.mapper.comic.CategoryMapper;
 import dev.matrixlab.comicopia.dto.comic.CategoryDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
-import dev.matrixlab.comicopia.dto.system.CallbackData;
 import dev.matrixlab.comicopia.entity.comic.CategoryDO;
 import dev.matrixlab.comicopia.service.comic.CategoryService;
+import dev.matrixlab.comicopia.vo.comic.CategoryVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryMapper categoryMapper;
 
+    public CategoryServiceImpl(final CategoryMapper categoryMapper) {
+        this.categoryMapper = categoryMapper;
+    }
+
     @Override
-    public void createCategory(CategoryDTO categoryDTO) {
+    public String saveCategory(CategoryDTO categoryDTO) {
         if (categoryMapper.nameDuplicateCheck(categoryDTO.getName()) > 0) {
             throw new InternalException("The category name is duplicated, creating a category failed.");
         }
@@ -30,19 +32,19 @@ public class CategoryServiceImpl implements CategoryService {
         if (categoryMapper.insertCategory(categoryDO) == 0) {
             throw new InternalException("Save failed.");
         }
-        CallbackData.setResource("Added successfully.");
+        return "Added category successfully.";
     }
 
     @Override
-    public void deleteCategoryById(Long categoryId) {
+    public String removeCategoryById(Long categoryId) {
         if (categoryMapper.deleteCategoryById(categoryId) == 0) {
             throw new InternalException("Delete failed.");
         }
-        CallbackData.setResource("Deleted successfully.");
+        return "Deleted category successfully.";
     }
 
     @Override
-    public void updateCategoryById(CategoryDTO categoryDTO) {
+    public String updateCategoryById(CategoryDTO categoryDTO) {
         if (categoryMapper.checkCategoryExistById(categoryDTO.getId()) == 0) {
             throw new InternalException("Category does not exist.");
         }
@@ -52,12 +54,11 @@ public class CategoryServiceImpl implements CategoryService {
         if (categoryMapper.updateCategoryById(categoryDO) == 0) {
             throw new InternalException("Update failed.");
         }
-        CallbackData.setResource("Updated successfully.");
-
+        return "Updated category successfully.";
     }
 
     @Override
-    public List<CategoryDTO> listCategoriesByName(String categoryName) {
+    public List<CategoryVO> listCategoriesByName(String categoryName) {
         if ("".equals(categoryName)) {
             return categoryMapper.listCategories();
         } else {

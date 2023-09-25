@@ -4,11 +4,6 @@ import dev.matrixlab.comicopia.entity.system.CallbackData;
 
 public class CallbackUtils {
 
-    public static <T> CallbackData<T> success() {
-        return success(null);
-
-    }
-
     public static <T> CallbackData<T> success(String message) {
         return new CallbackData<>("00000", message, null);
     }

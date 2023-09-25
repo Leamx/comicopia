@@ -8,6 +8,7 @@ class ComicopiaApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println(System.currentTimeMillis());
     }
 
 }

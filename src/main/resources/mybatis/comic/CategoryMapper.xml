@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.CategoryMapper">
+
+    <resultMap id="CategoryDO" type="dev.matrixlab.comicopia.entity.comic.CategoryDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="CategoryVO" type="dev.matrixlab.comicopia.vo.comic.CategoryVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+
+    <insert id="insertCategory" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO" useGeneratedKeys="true" keyProperty="id">
+        insert into co_category (id, name, description, gmt_create, gmt_modified)
+        values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
+    </insert>
+
+    <select id="nameDuplicateCheck" resultType="int">
+        select count(*) from co_category where name = #{categoryName}
+    </select>
+
+    <delete id="deleteCategoryById">
+        delete from co_category where id = #{id}
+    </delete>
+
+    <select id="checkCategoryExistById" resultType="int">
+        select count(*) from co_category where id = #{id}
+    </select>
+
+    <update id="updateCategoryById" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO">
+        update co_category c
+        <set>
+            <if test="name != null">
+                c.name = #{name},
+            </if>
+            <if test="description != null">
+                c.description = #{description},
+            </if>
+            <if test="gmtModified != null">
+                c.gmt_modified = #{gmtModified},
+            </if>
+        </set>
+        <where>
+            c.id = #{id}
+        </where>
+    </update>
+
+    <select id="listCategories" resultMap="CategoryVO">
+        select c.id, c.name, c.description
+        from co_category c
+        order by c.gmt_create desc
+    </select>
+
+    <select id="listCategoriesByName" resultMap="CategoryVO">
+        select c.id, c.name, c.description
+        from co_category c
+        where c.name like concat('%', #{categoryName}, '%')
+        order by c.gmt_create desc
+    </select>
+
+
+
+</mapper>

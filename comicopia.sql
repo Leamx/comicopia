@@ -1,0 +1,52 @@
+CREATE TABLE co_comic (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    name VARCHAR(256) NOT NULL ,
+    description VARCHAR(1024) NULL ,
+    cover_url VARCHAR(512) NULL ,
+    status TINYINT NULL DEFAULT 0 ,
+    views BIGINT UNSIGNED DEFAULT 0 ,
+    likes BIGINT UNSIGNED DEFAULT 0 ,
+    gmt_create BIGINT UNSIGNED NOT NULL ,
+    gmt_modified BIGINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE co_author (
+    id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    name VARCHAR(64) NOT NULL ,
+    bio VARCHAR(256) NULL ,
+    avatar VARCHAR(512) NULL ,
+    gmt_create BIGINT UNSIGNED NOT NULL ,
+    gmt_modified BIGINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE co_category (
+    id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    name VARCHAR(64) NOT NULL ,
+    description VARCHAR(1024) NULL ,
+    gmt_create BIGINT UNSIGNED NOT NULL ,
+    gmt_modified BIGINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE co_chapter (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    comic_id BIGINT UNSIGNED NOT NULL ,
+    title VARCHAR(32) NULL ,
+    sub_title VARCHAR(64) NULL ,
+    chapter_order INT UNSIGNED DEFAULT 0 ,
+    gmt_create BIGINT UNSIGNED NOT NULL ,
+    gmt_modified BIGINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE c_image (
+     id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+     file_uid VARCHAR(64) NOT NULL ,
+     comic_id BIGINT UNSIGNED NOT NULL ,
+     chapter_id BIGINT UNSIGNED NULL ,
+     image_order INT UNSIGNED DEFAULT 0 ,
+     type TINYINT DEFAULT 0 ,
+     original_name VARCHAR(32) NULL ,
+     description VARCHAR(128) NULL ,
+     extension VARCHAR(8) NULL ,
+     gmt_create BIGINT UNSIGNED NOT NULL ,
+     gmt_modified BIGINT UNSIGNED NOT NULL
+);

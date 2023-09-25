@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapperTests">
+
+    <resultMap id="AuthorDO" type="dev.matrixlab.comicopia.entity.comic.AuthorDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="bio" jdbcType="VARCHAR" property="bio"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="AuthorVO" type="dev.matrixlab.comicopia.vo.comic.AuthorVO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="bio" jdbcType="VARCHAR" property="bio"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    </resultMap>
+
+    <insert id="insertAuthor" parameterType="dev.matrixlab.comicopia.entity.comic.AuthorDO" useGeneratedKeys="true" keyProperty="id">
+        insert into co_author (id, name, bio, avatar, gmt_create, gmt_modified)
+        values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, #{avatar, jdbcType=VARCHAR},
+        #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
+    </insert>
+
+    <delete id="deleteAuthorById">
+        delete from co_author where id = #{id}
+    </delete>
+
+    <select id="nameDuplicateCheck" resultType="int">
+        select count(*) from co_author where name = #{authorName}
+    </select>
+
+    <select id="checkAuthorExistById" resultType="int">
+        select count(*) from co_author where id = #{id}
+    </select>
+
+    <update id="updateAuthorById" parameterType="dev.matrixlab.comicopia.entity.comic.AuthorDO">
+        update co_author a
+        <set>
+            <if test="name != null">
+                a.name = #{name},
+            </if>
+            <if test="bio != null">
+                a.bio = #{bio},
+            </if>
+            <if test="avatar != null">
+                a.avatar = #{avatar},
+            </if>
+            <if test="gmtModified != null">
+                a.gmt_modified = #{gmtModified},
+            </if>
+        </set>
+        <where>
+            a.id = #{authorId}
+        </where>
+    </update>
+
+    <select id="listAuthors" resultMap="AuthorVO">
+        select a.id, a.name, a.bio, a.avatar
+        from co_author a
+    </select>
+
+    <select id="listAuthorsByName" resultMap="AuthorVO">
+        select a.id, a.name, a.bio, a.avatar
+        from co_author a
+        where name like concat('%', #{authorName}, '%')
+    </select>
+
+</mapper>

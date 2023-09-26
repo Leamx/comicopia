@@ -1,10 +1,11 @@
 package dev.matrixlab.comicopia.service.comic.impl;
 
 import dev.matrixlab.comicopia.dao.mapper.comic.ChapterMapper;
-import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
+import dev.matrixlab.comicopia.dto.comic.ChapterDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
 import dev.matrixlab.comicopia.entity.comic.ChapterDO;
 import dev.matrixlab.comicopia.service.comic.ChapterService;
+import dev.matrixlab.comicopia.vo.comic.ChapterDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,11 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public String saveChapter(ChapterInfoDTO chapterInfoDTO) {
-        if (chapterMapper.countChapterByChapterOrder(chapterInfoDTO.getComicId(), chapterInfoDTO.getChapterOrder()) > 0) {
+    public String saveChapter(ChapterDTO chapterDTO) {
+        if (chapterMapper.countChapterByOrder(chapterDTO.getComicId(), chapterDTO.getOrder()) > 0) {
             throw new InternalException("The chapter order is duplicated, creating a chapter failed.");
         }
-        ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperInfoDTO2ChapterDO(chapterInfoDTO);
+        ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperDTO2ChapterDO(chapterDTO);
         Long now = System.currentTimeMillis();
         chapterDO.setGmtCreate(now);
         chapterDO.setGmtModified(now);
@@ -44,11 +45,11 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public String updateChapterInfoById(ChapterInfoDTO chapterInfoDTO) {
-        if (chapterMapper.countChaptersById(chapterInfoDTO.getId()) > 0) {
+    public String updateChapterById(ChapterDTO chapterDTO) {
+        if (chapterMapper.countChaptersById(chapterDTO.getId()) > 0) {
             throw new InternalException("The chapter order is duplicated, creating a chapter failed.");
         }
-        ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperInfoDTO2ChapterDO(chapterInfoDTO);
+        ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperDTO2ChapterDO(chapterDTO);
         Long now = System.currentTimeMillis();
         chapterDO.setGmtModified(now);
         if (chapterMapper.updateChapterById(chapterDO) == 0) {
@@ -61,4 +62,10 @@ public class ChapterServiceImpl implements ChapterService {
     public List<ChapterVO> listChaptersByComicId(Long comicId) {
         return chapterMapper.selectChaptersByComicId(comicId);
     }
+
+    @Override
+    public ChapterDetailsVO getChapterDetailsById(Long chapterId) {
+        return chapterMapper.selectChapterDetailsById(chapterId);
+    }
+
 }

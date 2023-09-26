@@ -10,7 +10,8 @@ public class ChapterDO {
 
     private String subTitle;
 
-    private Integer chapterOrder;
+    // 章节顺序
+    private Integer order;
 
     private Long gmtCreate;
 
@@ -48,12 +49,12 @@ public class ChapterDO {
         this.subTitle = subTitle;
     }
 
-    public Integer getChapterOrder() {
-        return chapterOrder;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setChapterOrder(Integer chapterOrder) {
-        this.chapterOrder = chapterOrder;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public Long getGmtCreate() {
@@ -79,10 +80,9 @@ public class ChapterDO {
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
-                ", chapterOrder=" + chapterOrder +
+                ", order=" + order +
                 ", gmtCreate=" + gmtCreate +
                 ", gmtModified=" + gmtModified +
                 '}';
     }
-
 }

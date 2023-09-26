@@ -1,6 +1,7 @@
 package dev.matrixlab.comicopia.dao.mapper.comic;
 
 import dev.matrixlab.comicopia.entity.comic.ChapterDO;
+import dev.matrixlab.comicopia.vo.comic.ChapterDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -10,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper {
 
-    int countChapterByChapterOrder(@Param("comicId") Long comicId, @Param("chapterOrder") Integer chapterOrder);
+    int countChapterByOrder(@Param("comicId") Long comicId, @Param("order") Integer order);
 
     int insertChapter(ChapterDO chapterDO);
 
@@ -21,4 +22,6 @@ public interface ChapterMapper {
     int updateChapterById(ChapterDO chapterDO);
 
     List<ChapterVO> selectChaptersByComicId(@Param("comicId") Long comicId);
+
+    ChapterDetailsVO selectChapterDetailsById(Long id);
 }

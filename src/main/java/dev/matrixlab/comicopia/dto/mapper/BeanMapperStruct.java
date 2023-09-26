@@ -2,7 +2,7 @@ package dev.matrixlab.comicopia.dto.mapper;
 
 import dev.matrixlab.comicopia.dto.comic.AuthorDTO;
 import dev.matrixlab.comicopia.dto.comic.CategoryDTO;
-import dev.matrixlab.comicopia.dto.comic.ChapterInfoDTO;
+import dev.matrixlab.comicopia.dto.comic.ChapterDTO;
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
 import dev.matrixlab.comicopia.entity.comic.AuthorDO;
 import dev.matrixlab.comicopia.entity.comic.CategoryDO;
@@ -33,6 +33,6 @@ public interface BeanMapperStruct {
 
     // -------------------------- chapter -------------------------------------
 
-    ChapterDO chatperInfoDTO2ChapterDO(ChapterInfoDTO chapterInfoDTO);
+    ChapterDO chatperDTO2ChapterDO(ChapterDTO chapterDTO);
 
 }

@@ -2,7 +2,7 @@ package dev.matrixlab.comicopia.dto.comic;
 
 import java.io.Serializable;
 
-public class ChapterInfoDTO implements Serializable {
+public class ChapterDTO implements Serializable {
 
     private static final long serialVersionUID = 6965207432762767970L;
 
@@ -14,7 +14,7 @@ public class ChapterInfoDTO implements Serializable {
 
     private String subTitle;
 
-    private Integer chapterOrder;
+    private Integer order;
 
     private Long gmtCreate;
 
@@ -50,12 +50,12 @@ public class ChapterInfoDTO implements Serializable {
         this.subTitle = subTitle;
     }
 
-    public Integer getChapterOrder() {
-        return chapterOrder;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setChapterOrder(Integer chapterOrder) {
-        this.chapterOrder = chapterOrder;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public Long getGmtCreate() {
@@ -68,14 +68,13 @@ public class ChapterInfoDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ChapterInfoDTO{" +
+        return "ChapterDTO{" +
                 "id=" + id +
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
-                ", chapterOrder=" + chapterOrder +
+                ", order=" + order +
                 ", gmtCreate=" + gmtCreate +
                 '}';
     }
-
 }

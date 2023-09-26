@@ -32,7 +32,7 @@ CREATE TABLE co_chapter (
     comic_id BIGINT UNSIGNED NOT NULL ,
     title VARCHAR(32) NULL ,
     sub_title VARCHAR(64) NULL ,
-    chapter_order INT UNSIGNED DEFAULT 0 ,
+    order INT UNSIGNED DEFAULT 0 ,
     gmt_create BIGINT UNSIGNED NOT NULL ,
     gmt_modified BIGINT UNSIGNED NOT NULL
 );
@@ -42,7 +42,7 @@ CREATE TABLE c_image (
      file_uid VARCHAR(64) NOT NULL ,
      comic_id BIGINT UNSIGNED NOT NULL ,
      chapter_id BIGINT UNSIGNED NULL ,
-     image_order INT UNSIGNED DEFAULT 0 ,
+     sort INT UNSIGNED DEFAULT 0 ,
      type TINYINT DEFAULT 0 ,
      original_name VARCHAR(32) NULL ,
      description VARCHAR(128) NULL ,

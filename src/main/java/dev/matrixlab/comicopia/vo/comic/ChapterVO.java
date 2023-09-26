@@ -14,7 +14,7 @@ public class ChapterVO implements Serializable {
 
     private String subTitle;
 
-    private Integer chapterOrder;
+    private Integer order;
 
     private Long gmtCreate;
 
@@ -50,12 +50,12 @@ public class ChapterVO implements Serializable {
         this.subTitle = subTitle;
     }
 
-    public Integer getChapterOrder() {
-        return chapterOrder;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setChapterOrder(Integer chapterOrder) {
-        this.chapterOrder = chapterOrder;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public Long getGmtCreate() {
@@ -68,12 +68,12 @@ public class ChapterVO implements Serializable {
 
     @Override
     public String toString() {
-        return "ChapterInfoVO{" +
+        return "ChapterVO{" +
                 "id=" + id +
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
-                ", chapterOrder=" + chapterOrder +
+                ", order=" + order +
                 ", gmtCreate=" + gmtCreate +
                 '}';
     }

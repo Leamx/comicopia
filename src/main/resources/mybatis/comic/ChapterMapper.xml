@@ -9,7 +9,7 @@
         <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
-        <result column="chapter_order" jdbcType="INTEGER" property="chapterOrder"/>
+        <result column="order" jdbcType="INTEGER" property="order"/>
         <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
         <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
     </resultMap>
@@ -19,19 +19,40 @@
         <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
-        <result column="chapter_order" jdbcType="INTEGER" property="chapterOrder"/>
+        <result column="order" jdbcType="INTEGER" property="order"/>
         <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
     </resultMap>
 
-    <select id="countChapterByChapterOrder" resultType="int">
+    <resultMap id="ChapterDetailsVO" type="dev.matrixlab.comicopia.vo.comic.ChapterDetailsVO">
+        <association property="chapterVO" javaType="dev.matrixlab.comicopia.vo.comic.ChapterDetailsVO">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
+            <result column="title" jdbcType="VARCHAR" property="title"/>
+            <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
+            <result column="order" jdbcType="INTEGER" property="order"/>
+            <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        </association>
+
+        <collection property="imageVOList" ofType="dev.matrixlab.comicopia.vo.comic.ImageVO">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="file_uid" jdbcType="VARCHAR" property="fileUid"/>
+            <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
+            <result column="chapter_id" jdbcType="BIGINT" property="chapterId"/>
+            <result column="sort" jdbcType="INTEGER" property="sort"/>
+            <result column="type" jdbcType="INTEGER" property="type"/>
+            <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        </collection>
+    </resultMap>
+
+    <select id="countChapterByOrder" resultType="int">
         select count(*)
         from co_chapter
-        where comic_id = #{comicId} and chapter_order = #{chapterOrder}
+        where comic_id = #{comicId} and order = #{order}
     </select>
 
     <insert id="insertChapter" parameterType="dev.matrixlab.comicopia.entity.comic.ChapterDO" useGeneratedKeys="true" keyProperty="id">
-        insert into co_chapter(id, comic_id, title, sub_title, chapter_order, gmt_create, gmt_modified)
-        values(#{id, jdbcType=BIGINT}, #{comicId, jdbcType=BIGINT}, #{title, jdbcType=VARCHAR}, #{subTitle, jdbcType=VARCHAR}, #{chapterOrder, jdbcType=INTEGER}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
+        insert into co_chapter(id, comic_id, title, sub_title, order, gmt_create, gmt_modified)
+        values(#{id, jdbcType=BIGINT}, #{comicId, jdbcType=BIGINT}, #{title, jdbcType=VARCHAR}, #{subTitle, jdbcType=VARCHAR}, #{order, jdbcType=INTEGER}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
     </insert>
 
     <delete id="deleteChapterById">
@@ -52,7 +73,7 @@
                 c.sub_title = #{subTitle},
             </if>
             <if test="chapterOrder != null">
-                c.chapter_order = #{chapterOrder},
+                c.order = #{order},
             </if>
             <if test="gmtModified != null">
                 c.gmt_modified = #{gmtModified},
@@ -64,10 +85,18 @@
     </update>
 
     <select id="selectChaptersByComicId" resultMap="ChapterVO">
-        select c.id, c.comic_id, c.title, c.sub_title, c.chapter_order, c.gmt_create
+        select c.id, c.comic_id, c.title, c.sub_title, c.order, c.gmt_create
         from co_chapter c
         where c.comic_id = #{comicId}
         order by chapter_order asc
+    </select>
+
+    <select id="selectChapterDetailsById" resultMap="ChapterDetailsVO">
+        select c.id, c.comic_id, c.title, c.sub_title, c.order, c.gmt_create,
+               i.id, i.file_uid, i.comic, i.chapter_id, i.sort, i.type, i.gmt_create
+        from co_chapter c
+        left join co_image i on c.id = i.chapter_id
+        where c.id = #{id}
     </select>
 
 </mapper>

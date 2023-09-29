@@ -1,5 +1,6 @@
 package dev.matrixlab.comicopia.service.comic.impl;
 
+import dev.matrixlab.comicopia.controller.exception.ColumnValueDuplicateException;
 import dev.matrixlab.comicopia.dao.mapper.comic.CategoryMapper;
 import dev.matrixlab.comicopia.dto.comic.CategoryDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
@@ -27,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public String saveCategory(CategoryDTO categoryDTO) {
         if (categoryMapper.countCategoriesByName(categoryDTO.getName()) > 0) {
-            throw new InternalException("The category name is duplicated, creating a category failed.");
+            throw new ColumnValueDuplicateException("The category name is duplicated, creating a category failed.");
         }
         CategoryDO categoryDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.categoryDTO2CategoryDO(categoryDTO);
         Long now = System.currentTimeMillis();

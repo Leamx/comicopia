@@ -19,24 +19,24 @@
     </resultMap>
 
     <insert id="insertCategory" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO" useGeneratedKeys="true" keyProperty="id">
-        insert into co_category (id, name, description, gmt_create, gmt_modified)
+        insert into com_category (id, name, description, gmt_create, gmt_modified)
         values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
     </insert>
 
     <select id="countCategoriesByName" resultType="int">
-        select count(*) from co_category where name = #{categoryName}
+        select count(*) from com_category where name = #{categoryName}
     </select>
 
     <delete id="deleteCategoryById">
-        delete from co_category where id = #{id}
+        delete from com_category where id = #{id}
     </delete>
 
     <select id="countCategoriesById" resultType="int">
-        select count(*) from co_category where id = #{id}
+        select count(*) from com_category where id = #{id}
     </select>
 
     <update id="updateCategoryById" parameterType="dev.matrixlab.comicopia.entity.comic.CategoryDO">
-        update co_category c
+        update com_category c
         <set>
             <if test="name != null">
                 c.name = #{name},
@@ -55,13 +55,13 @@
 
     <select id="selectCategories" resultMap="CategoryVO">
         select c.id, c.name, c.description
-        from co_category c
+        from com_category c
         order by c.gmt_create desc
     </select>
 
     <select id="selectCategoriesByName" resultMap="CategoryVO">
         select c.id, c.name, c.description
-        from co_category c
+        from com_category c
         where c.name like concat('%', #{categoryName}, '%')
         order by c.gmt_create desc
     </select>

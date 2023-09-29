@@ -1,5 +1,6 @@
 package dev.matrixlab.comicopia.service.comic.impl;
 
+import dev.matrixlab.comicopia.controller.exception.ColumnValueDuplicateException;
 import dev.matrixlab.comicopia.dao.mapper.comic.ComicMapper;
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
@@ -23,7 +24,7 @@ public class ComicServiceImpl implements ComicService {
     @Override
     public String saveComic(ComicDTO comicDTO) {
         if (comicMapper.countComicsByName(comicDTO.getName()) > 0) {
-            throw new InternalException("The comic name is duplicated, creating a comic failed.");
+            throw new ColumnValueDuplicateException("The comic name is duplicated, creating a comic failed.");
         }
         ComicDO comicDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.comicDTO2ComicDO(comicDTO);
         Long now = System.currentTimeMillis();

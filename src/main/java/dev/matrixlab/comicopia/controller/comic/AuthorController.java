@@ -44,4 +44,9 @@ public class AuthorController {
         return CallbackUtils.success(authorService.listAuthorsByName(authorName));
     }
 
+//    @PostMapping("/modifyAvatarById")
+//    public CallbackData<String> modifyAvatarById(@RequestParam("authorId") Long authorId, @RequestParam("avatar") String avatar) {
+//        return CallbackUtils.success(authorService.updateAvatarById(authorId, avatar));
+//    }
+
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper {
 
-    int countChapterByOrder(@Param("comicId") Long comicId, @Param("order") Integer order);
+    int countChapterByComicId(@Param("comicId") Long comicId);
 
     int insertChapter(ChapterDO chapterDO);
 
@@ -23,5 +23,5 @@ public interface ChapterMapper {
 
     List<ChapterVO> selectChaptersByComicId(@Param("comicId") Long comicId);
 
-    ChapterDetailsVO selectChapterDetailsById(Long id);
+    ChapterDetailsVO selectChapterDetailsById(@Param("id") Long id);
 }

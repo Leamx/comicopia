@@ -1,5 +1,6 @@
 package dev.matrixlab.comicopia.service.comic.impl;
 
+import dev.matrixlab.comicopia.controller.exception.ColumnValueDuplicateException;
 import dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapper;
 import dev.matrixlab.comicopia.dto.comic.AuthorDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
@@ -27,7 +28,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public String saveAuthor(AuthorDTO authorDTO) {
         if (authorMapper.countAuthorsByName(authorDTO.getName()) > 0) {
-            throw new InternalException("The author name is duplicated, creating a author failed.");
+            throw new ColumnValueDuplicateException("The author name is duplicated, creating a author failed.");
         }
         AuthorDO authorDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.authorDTO2AuthorDO(authorDTO);
         Long now = System.currentTimeMillis();

@@ -6,8 +6,6 @@ public class ImageVO implements Serializable {
 
     private static final long serialVersionUID = -2332812840691153125L;
 
-    private Long id;
-
     private String fileUID;
 
     private Long comicId;
@@ -18,15 +16,9 @@ public class ImageVO implements Serializable {
 
     private Integer type;
 
+    private String uri;
+
     private Long gmtCreate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFileUID() {
         return fileUID;
@@ -68,6 +60,14 @@ public class ImageVO implements Serializable {
         this.type = type;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     public Long getGmtCreate() {
         return gmtCreate;
     }
@@ -79,12 +79,12 @@ public class ImageVO implements Serializable {
     @Override
     public String toString() {
         return "ImageVO{" +
-                "id=" + id +
-                ", fileUID='" + fileUID + '\'' +
+                "fileUID='" + fileUID + '\'' +
                 ", comicId=" + comicId +
                 ", chapterId=" + chapterId +
                 ", sort=" + sort +
                 ", type=" + type +
+                ", uri='" + uri + '\'' +
                 ", gmtCreate=" + gmtCreate +
                 '}';
     }

@@ -8,6 +8,8 @@ import dev.matrixlab.comicopia.service.comic.ChapterService;
 import dev.matrixlab.comicopia.vo.comic.ChapterDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,13 +23,14 @@ public class ChapterServiceImpl implements ChapterService {
         this.chapterMapper = chapterMapper;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthorServiceImpl.class);
+
     @Override
     public String saveChapter(ChapterDTO chapterDTO) {
-        if (chapterMapper.countChapterByOrder(chapterDTO.getComicId(), chapterDTO.getOrder()) > 0) {
-            throw new InternalException("The chapter order is duplicated, creating a chapter failed.");
-        }
+        int count = chapterMapper.countChapterByComicId(chapterDTO.getComicId());
         ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperDTO2ChapterDO(chapterDTO);
         Long now = System.currentTimeMillis();
+        chapterDO.setOrder(++count);
         chapterDO.setGmtCreate(now);
         chapterDO.setGmtModified(now);
         if (chapterMapper.insertChapter(chapterDO) == 0) {
@@ -46,8 +49,8 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public String updateChapterById(ChapterDTO chapterDTO) {
-        if (chapterMapper.countChaptersById(chapterDTO.getId()) > 0) {
-            throw new InternalException("The chapter order is duplicated, creating a chapter failed.");
+        if (chapterMapper.countChaptersById(chapterDTO.getId()) == 0) {
+            throw new InternalException("The chapter does not exist.");
         }
         ChapterDO chapterDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.chatperDTO2ChapterDO(chapterDTO);
         Long now = System.currentTimeMillis();

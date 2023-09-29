@@ -14,8 +14,6 @@ public class ChapterDTO implements Serializable {
 
     private String subTitle;
 
-    private Integer order;
-
     private Long gmtCreate;
 
     public Long getId() {
@@ -50,14 +48,6 @@ public class ChapterDTO implements Serializable {
         this.subTitle = subTitle;
     }
 
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
     public Long getGmtCreate() {
         return gmtCreate;
     }
@@ -73,7 +63,6 @@ public class ChapterDTO implements Serializable {
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
-                ", order=" + order +
                 ", gmtCreate=" + gmtCreate +
                 '}';
     }

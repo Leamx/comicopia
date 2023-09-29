@@ -15,6 +15,8 @@ public class ImageDO {
     // 0: normal 1: chatper cover 2: comic cover
     private Integer type;
 
+    private String uri;
+
     private String originalName;
 
     private String description;
@@ -73,6 +75,14 @@ public class ImageDO {
         this.type = type;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     public String getOriginalName() {
         return originalName;
     }
@@ -122,6 +132,7 @@ public class ImageDO {
                 ", chapterId=" + chapterId +
                 ", sort=" + sort +
                 ", type=" + type +
+                ", uri='" + uri + '\'' +
                 ", originalName='" + originalName + '\'' +
                 ", description='" + description + '\'' +
                 ", extension='" + extension + '\'' +

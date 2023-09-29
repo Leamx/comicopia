@@ -29,17 +29,17 @@
     </resultMap>
 
     <insert id="insertComic" parameterType="dev.matrixlab.comicopia.entity.comic.ComicDO" useGeneratedKeys="true" keyProperty="id">
-        insert into co_comic (id, name, description, cover_url, status, views, likes, gmt_create, gmt_modified)
+        insert into com_comic (id, name, description, cover_url, status, views, likes, gmt_create, gmt_modified)
         values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{description, jdbcType=VARCHAR}, #{coverUrl, jdbcType=VARCHAR},
         #{status, jdbcType=INTEGER}, #{views, jdbcType=BIGINT}, #{likes, jdbcType=BIGINT}, #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
     </insert>
 
     <delete id="deleteComicById">
-        delete from co_comic where id = #{id}
+        delete from com_comic where id = #{id}
     </delete>
 
     <update id="updateComicById" parameterType="dev.matrixlab.comicopia.entity.comic.ComicDO">
-        update from co_comic c
+        update com_comic c
         <set>
             <if test="name != null">
                 c.name = #{name},
@@ -70,24 +70,24 @@
 
     <select id="selectComics" resultMap="ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
-        from co_comic c
+        from com_comic c
     </select>
 
     <select id="selectComicsByName" resultMap="ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
-        from co_comic c
+        from com_comic c
         where c.name like concat('%', #{comicName}, '%')
     </select>
 
     <select id="countComicsByName" resultType="int">
         select count(*)
-        from co_comic c
+        from com_comic c
         where c.name = #{comicName}
     </select>
 
     <select id="countComicsById" resultType="int">
         select count(*)
-        from co_comic c
+        from com_comic c
         where c.id = #{id}
     </select>
 

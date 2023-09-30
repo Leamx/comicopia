@@ -9,7 +9,7 @@ public interface CategoryService {
     
     String saveCategory(CategoryDTO categoryDTO);
 
-    String removeCategoryById(Long categoryId);
+    String removeCategoryById(long categoryId);
 
     String updateCategoryById(CategoryDTO categoryDTO);
 

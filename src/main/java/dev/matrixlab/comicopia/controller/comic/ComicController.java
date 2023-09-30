@@ -25,7 +25,7 @@ public class ComicController {
     }
 
     @DeleteMapping("/deleteComicById")
-    public CallbackData<String> deleteComicById(@RequestParam("comicId") Long comicId) {
+    public CallbackData<String> deleteComicById(@RequestParam("comicId") long comicId) {
         return CallbackUtils.success(comicService.removeComicById(comicId));
     }
 

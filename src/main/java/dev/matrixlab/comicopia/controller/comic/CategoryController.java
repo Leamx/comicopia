@@ -25,7 +25,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/deleteCategoryById")
-    public CallbackData<String> deleteCategoryById(@RequestParam("categoryId") Long categoryId) {
+    public CallbackData<String> deleteCategoryById(@RequestParam("categoryId") long categoryId) {
         return CallbackUtils.success(categoryService.removeCategoryById(categoryId));
     }
 

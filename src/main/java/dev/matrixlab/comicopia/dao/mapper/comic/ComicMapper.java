@@ -12,7 +12,7 @@ public interface ComicMapper {
 
     int insertComic(ComicDO comicDO);
 
-    int deleteComicById(@Param("id") Long id);
+    int deleteComicById(@Param("id") long id);
 
     int updateComicById(ComicDO comicDO);
 
@@ -22,5 +22,5 @@ public interface ComicMapper {
 
     int countComicsByName(@Param("comicName") String comicName);
 
-    int countComicsById(@Param("id") Long id);
+    int countComicsById(@Param("id") long id);
 }

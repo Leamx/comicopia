@@ -9,7 +9,7 @@ public interface ComicService {
 
     String saveComic(ComicDTO comicDTO);
 
-    String removeComicById(Long comicId);
+    String removeComicById(long comicId);
 
     String updateComicById(ComicDTO comicDTO);
 

@@ -40,7 +40,7 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public String removeChapterById(Long chapterId) {
+    public String removeChapterById(long chapterId) {
         if (chapterMapper.deleteChapterById(chapterId) == 0) {
             throw new InternalException("Delete failed.");
         }
@@ -62,12 +62,12 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public List<ChapterVO> listChaptersByComicId(Long comicId) {
+    public List<ChapterVO> listChaptersByComicId(long comicId) {
         return chapterMapper.selectChaptersByComicId(comicId);
     }
 
     @Override
-    public ChapterDetailsVO getChapterDetailsById(Long chapterId) {
+    public ChapterDetailsVO getChapterDetailsById(long chapterId) {
         return chapterMapper.selectChapterDetailsById(chapterId);
     }
 

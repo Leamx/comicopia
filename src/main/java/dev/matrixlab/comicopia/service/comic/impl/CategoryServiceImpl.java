@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public String removeCategoryById(Long categoryId) {
+    public String removeCategoryById(long categoryId) {
         if (categoryMapper.deleteCategoryById(categoryId) == 0) {
             throw new InternalException("Delete failed.");
         }

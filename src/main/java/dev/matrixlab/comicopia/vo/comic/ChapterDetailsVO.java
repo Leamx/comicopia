@@ -1,5 +1,7 @@
 package dev.matrixlab.comicopia.vo.comic;
 
+import dev.matrixlab.comicopia.vo.storage.ImageVO;
+
 import java.io.Serializable;
 import java.util.List;
 

@@ -26,7 +26,7 @@ public class ChapterController {
     }
 
     @DeleteMapping("/deleteChapterById")
-    public CallbackData<String> deleteChapterById(@RequestParam("chapterId") Long chapterId) {
+    public CallbackData<String> deleteChapterById(@RequestParam("chapterId") long chapterId) {
         return CallbackUtils.success(chapterService.removeChapterById(chapterId));
     }
 
@@ -36,12 +36,12 @@ public class ChapterController {
     }
 
     @GetMapping("/queryChaptersByComicId")
-    public CallbackData<List<ChapterVO>> queryChaptersByComicId(@RequestParam("comicId") Long comicId) {
+    public CallbackData<List<ChapterVO>> queryChaptersByComicId(@RequestParam("comicId") long comicId) {
         return CallbackUtils.success(chapterService.listChaptersByComicId(comicId));
     }
 
     @GetMapping("/queryChapterDetailsById")
-    public CallbackData<ChapterDetailsVO> queryChapterDetailsById(@RequestParam("chapterId") Long chapterId) {
+    public CallbackData<ChapterDetailsVO> queryChapterDetailsById(@RequestParam("chapterId") long chapterId) {
         return CallbackUtils.success(chapterService.getChapterDetailsById(chapterId));
     }
 

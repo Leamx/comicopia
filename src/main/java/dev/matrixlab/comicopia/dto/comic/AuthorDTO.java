@@ -6,7 +6,7 @@ public class AuthorDTO implements Serializable {
 
     private static final long serialVersionUID = 7293117865500668868L;
 
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -14,11 +14,11 @@ public class AuthorDTO implements Serializable {
 
     private String avatar;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

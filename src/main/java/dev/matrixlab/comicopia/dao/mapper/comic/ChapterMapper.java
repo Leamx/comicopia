@@ -11,17 +11,17 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper {
 
-    int countChapterByComicId(@Param("comicId") Long comicId);
+    int countChapterByComicId(@Param("comicId") long comicId);
 
     int insertChapter(ChapterDO chapterDO);
 
-    int deleteChapterById(@Param("id") Long id);
+    int deleteChapterById(@Param("id") long id);
 
-    int countChaptersById(@Param("id") Long id);
+    int countChaptersById(@Param("id") long id);
 
     int updateChapterById(ChapterDO chapterDO);
 
-    List<ChapterVO> selectChaptersByComicId(@Param("comicId") Long comicId);
+    List<ChapterVO> selectChaptersByComicId(@Param("comicId") long comicId);
 
-    ChapterDetailsVO selectChapterDetailsById(@Param("id") Long id);
+    ChapterDetailsVO selectChapterDetailsById(@Param("id") long id);
 }

@@ -1,4 +1,4 @@
-package dev.matrixlab.comicopia.vo.comic;
+package dev.matrixlab.comicopia.vo.storage;
 
 import java.io.Serializable;
 

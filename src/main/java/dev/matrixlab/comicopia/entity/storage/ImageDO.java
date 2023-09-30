@@ -1,4 +1,4 @@
-package dev.matrixlab.comicopia.entity.comic;
+package dev.matrixlab.comicopia.entity.storage;
 
 public class ImageDO {
 
@@ -12,7 +12,7 @@ public class ImageDO {
 
     private Integer sort;
 
-    // 0: normal 1: chatper cover 2: comic cover
+    // 0: normal 1: chatper cover 2: comic cover 3: avatar
     private Integer type;
 
     private String uri;

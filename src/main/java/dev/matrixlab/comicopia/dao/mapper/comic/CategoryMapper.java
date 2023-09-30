@@ -14,9 +14,9 @@ public interface CategoryMapper {
 
     int countCategoriesByName(@Param("categoryName") String categoryName);
 
-    int deleteCategoryById(@Param("id") Long id);
+    int deleteCategoryById(@Param("id") long id);
 
-    int countCategoriesById(@Param("id") Integer id);
+    int countCategoriesById(@Param("id") long id);
 
     int updateCategoryById(CategoryDO categoryDO);
 

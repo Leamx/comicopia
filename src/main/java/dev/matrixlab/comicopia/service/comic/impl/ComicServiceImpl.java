@@ -40,7 +40,7 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
-    public String removeComicById(Long comicId) {
+    public String removeComicById(long comicId) {
         if (comicMapper.deleteComicById(comicId) == 0) {
             throw new InternalException("Delete failed.");
         }

@@ -59,6 +59,12 @@
         </where>
     </update>
 
+    <select id="selectAuthorById" resultMap="AuthorDO">
+        select a.id, a.name, a.bio, a.avatar, a.gmt_create, a.gmt_modified
+        from com_author a
+        where a.id = #{id}
+    </select>
+
     <select id="selectAuthors" resultMap="AuthorVO">
         select a.id, a.name, a.bio, a.avatar
         from com_author a

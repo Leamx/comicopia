@@ -31,7 +31,7 @@
         <result column="order" jdbcType="INTEGER" property="order"/>
         <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
 
-        <collection property="images" ofType="dev.matrixlab.comicopia.vo.comic.ImageVO">
+        <collection property="images" ofType="dev.matrixlab.comicopia.vo.storage.ImageVO">
             <result column="i_file_uid" jdbcType="VARCHAR" property="fileUID"/>
             <result column="i_comic_id" jdbcType="BIGINT" property="comicId"/>
             <result column="i_chapter_id" jdbcType="BIGINT" property="chapterId"/>

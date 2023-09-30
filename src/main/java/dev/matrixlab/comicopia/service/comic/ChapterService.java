@@ -10,11 +10,11 @@ public interface ChapterService {
 
     String saveChapter(ChapterDTO chapterDTO);
 
-    String removeChapterById(Long chapterId);
+    String removeChapterById(long chapterId);
 
     String updateChapterById(ChapterDTO chapterDTO);
 
-    List<ChapterVO> listChaptersByComicId(Long comicId);
+    List<ChapterVO> listChaptersByComicId(long comicId);
 
-    ChapterDetailsVO getChapterDetailsById(Long chapterId);
+    ChapterDetailsVO getChapterDetailsById(long chapterId);
 }

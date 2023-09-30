@@ -1,7 +1,7 @@
-package dev.matrixlab.comicopia.service.comic.impl;
+package dev.matrixlab.comicopia.service.storage.impl;
 
 import dev.matrixlab.comicopia.constant.Constants;
-import dev.matrixlab.comicopia.service.comic.FileStorageService;
+import dev.matrixlab.comicopia.service.storage.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,16 +19,16 @@ public class LocalStorageServiceImpl implements FileStorageService {
 
     private static final Logger logger = LoggerFactory.getLogger(LocalStorageServiceImpl.class);
 
-    private final Path fileStorageLocation;
+    private final Path fileStoragePath;
 
     private static final String EXTENSION = "jpg";
 
     public LocalStorageServiceImpl() {
         // 指定文件存储的目录，可以根据您的需求修改
-        this.fileStorageLocation = Paths.get(Constants.PROJECT_PATH + File.separator + Constants.IMAGE_STORAGE_PATH);
+        this.fileStoragePath = Paths.get(Constants.PROJECT_PATH + File.separator + Constants.IMAGE_STORAGE_PATH);
         try {
-            if (!Files.exists(this.fileStorageLocation)) {
-                Files.createDirectories(this.fileStorageLocation);
+            if (!Files.exists(this.fileStoragePath)) {
+                Files.createDirectories(this.fileStoragePath);
             }
         } catch (IOException e) {
             throw new RuntimeException("无法创建文件存储目录", e);
@@ -36,13 +36,14 @@ public class LocalStorageServiceImpl implements FileStorageService {
     }
 
     @Override
-    public boolean storeFile(MultipartFile file, String fileUID, int type) {
+    public String storeFile(MultipartFile file, String fileUID, int type) {
+        String uri = File.separator + Constants.IMAGE_STORAGE_PATH + File.separator + fileUID + "." + EXTENSION;
         try {
-            Path targetLocation = this.fileStorageLocation.resolve(fileUID + "." + EXTENSION);
-            if (!Files.exists(targetLocation)) {
-                Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            Path targetPath = this.fileStoragePath.resolve(fileUID + "." + EXTENSION);
+            if (!Files.exists(targetPath)) {
+                Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
             }
-            return true;
+            return uri;
         } catch (IOException e) {
             throw new RuntimeException("文件上传失败", e);
         }
@@ -51,9 +52,9 @@ public class LocalStorageServiceImpl implements FileStorageService {
     @Override
     public boolean deleteFile(String fileUID, int type) {
         try {
-            Path targetLocation = this.fileStorageLocation.resolve(fileUID + "." + EXTENSION);
-            if (Files.exists(targetLocation)) {
-                Files.delete(targetLocation);
+            Path targetPath = this.fileStoragePath.resolve(fileUID + "." + EXTENSION);
+            if (Files.exists(targetPath)) {
+                Files.delete(targetPath);
             }
             return true;
         } catch (IOException e) {

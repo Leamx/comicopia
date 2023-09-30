@@ -12,13 +12,15 @@ public interface AuthorMapper {
 
     int insertAuthor(AuthorDO authorDO);
 
-    int deleteAuthorById(@Param("id") Long id);
+    int deleteAuthorById(@Param("id") long id);
 
     int countAuthorsByName(@Param("authorName") String authorName);
 
-    int countAuthorsById(@Param("id") Integer id);
+    int countAuthorsById(@Param("id") long id);
 
     int updateAuthorById(AuthorDO authorDO);
+
+    AuthorDO selectAuthorById(@Param("id") long id);
 
     List<AuthorVO> selectAuthors();
 

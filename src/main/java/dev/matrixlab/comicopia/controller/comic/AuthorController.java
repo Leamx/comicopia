@@ -6,6 +6,7 @@ import dev.matrixlab.comicopia.service.comic.AuthorService;
 import dev.matrixlab.comicopia.utils.CallbackUtils;
 import dev.matrixlab.comicopia.vo.comic.AuthorVO;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/deleteAuthorById")
-    public CallbackData<String> deleteAuthorById(@RequestParam("authorId") Long authorId) {
+    public CallbackData<String> deleteAuthorById(@RequestParam("authorId") long authorId) {
         return CallbackUtils.success(authorService.removeAuthorById(authorId));
     }
 
@@ -44,9 +45,9 @@ public class AuthorController {
         return CallbackUtils.success(authorService.listAuthorsByName(authorName));
     }
 
-//    @PostMapping("/modifyAvatarById")
-//    public CallbackData<String> modifyAvatarById(@RequestParam("authorId") Long authorId, @RequestParam("avatar") String avatar) {
-//        return CallbackUtils.success(authorService.updateAvatarById(authorId, avatar));
-//    }
+    @PostMapping("/modifyAvatarById")
+    public CallbackData<String> modifyAvatarById(@RequestParam("authorId") long authorId, @RequestParam("file") MultipartFile file) {
+        return CallbackUtils.success(authorService.updateAvatarById(authorId, file));
+    }
 
 }

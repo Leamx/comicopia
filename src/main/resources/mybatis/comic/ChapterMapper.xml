@@ -4,16 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.ChapterMapper">
     
-    <resultMap id="ChapterDO" type="dev.matrixlab.comicopia.entity.comic.ChapterDO">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="comic_id" jdbcType="BIGINT" property="comicId"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
-        <result column="order" jdbcType="INTEGER" property="order"/>
-        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
-        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
-    </resultMap>
-
     <resultMap id="ChapterVO" type="dev.matrixlab.comicopia.vo.comic.ChapterVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="comic_id" jdbcType="BIGINT" property="comicId"/>

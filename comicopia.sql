@@ -51,3 +51,15 @@ CREATE TABLE com_image (
      gmt_create BIGINT UNSIGNED NOT NULL ,
      gmt_modified BIGINT UNSIGNED NOT NULL
 );
+
+CREATE TABLE com_comic_category (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    comic_id BIGINT UNSIGNED,
+    category_id BIGINT UNSIGNED
+);
+
+CREATE TABLE com_comic_author (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    comic_id BIGINT UNSIGNED,
+    author_id BIGINT UNSIGNED
+)

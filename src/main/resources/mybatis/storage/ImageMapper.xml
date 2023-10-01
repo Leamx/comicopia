@@ -29,4 +29,8 @@
         delete from com_image where file_uid = #{fileUID}
     </delete>
 
+    <select id="selectImageURIByFileUID" resultType="java.lang.String">
+        select uri from com_image where file_uid = #{fileUID}
+    </select>
+
 </mapper>

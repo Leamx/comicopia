@@ -6,6 +6,7 @@ import dev.matrixlab.comicopia.dto.comic.ComicDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
 import dev.matrixlab.comicopia.entity.comic.ComicDO;
 import dev.matrixlab.comicopia.service.comic.ComicService;
+import dev.matrixlab.comicopia.vo.comic.ComicDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ComicVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.springframework.stereotype.Service;
@@ -70,4 +71,18 @@ public class ComicServiceImpl implements ComicService {
         }
     }
 
+    @Override
+    public ComicDetailsVO getComicDetailsById(long comicId) {
+        return comicMapper.selectComicDetailsById(comicId);
+    }
+
+    @Override
+    public List<ComicVO> listComicsByAuthorName(String authorName) {
+        return comicMapper.selectComicsByAuthorName(authorName);
+    }
+
+    @Override
+    public List<ComicVO> listComicsByCategoryName(String categoryName) {
+        return comicMapper.selectComicsByCategoryName(categoryName);
+    }
 }

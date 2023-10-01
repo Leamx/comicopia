@@ -53,9 +53,7 @@ public class LocalStorageServiceImpl implements FileStorageService {
     public boolean deleteFile(String fileUID, int type) {
         try {
             Path targetPath = this.fileStoragePath.resolve(fileUID + "." + EXTENSION);
-            if (Files.exists(targetPath)) {
-                Files.delete(targetPath);
-            }
+            Files.deleteIfExists(targetPath);
             return true;
         } catch (IOException e) {
             throw new RuntimeException("文件删除失败", e);

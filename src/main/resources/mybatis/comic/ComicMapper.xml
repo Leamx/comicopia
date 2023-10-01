@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.ComicMapper">
 
-    <resultMap id="ComicDO" type="dev.matrixlab.comicopia.entity.comic.ComicDO">
+    <resultMap id="ComicDetailsVO" type="dev.matrixlab.comicopia.vo.comic.ComicDetailsVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -13,19 +13,21 @@
         <result column="views" jdbcType="BIGINT" property="views"/>
         <result column="likes" jdbcType="BIGINT" property="likes"/>
         <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
-        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
-    </resultMap>
 
-    <resultMap id="ComicVO" type="dev.matrixlab.comicopia.vo.comic.ComicVO">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="description" jdbcType="VARCHAR" property="description"/>
-        <result column="cover_url" jdbcType="VARCHAR" property="coverUrl"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="views" jdbcType="BIGINT" property="views"/>
-        <result column="likes" jdbcType="BIGINT" property="likes"/>
-        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
-        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
+        <collection property="authors" ofType="dev.matrixlab.comicopia.vo.comic.AuthorVO">
+            <id column="a_id" jdbcType="BIGINT" property="id"/>
+            <result column="a_name" jdbcType="VARCHAR" property="name"/>
+            <result column="a_avatar" jdbcType="VARCHAR" property="avatar"/>
+        </collection>
+
+        <collection property="chapters" ofType="dev.matrixlab.comicopia.vo.comic.ChapterVO">
+            <id column="c_id" jdbcType="BIGINT" property="id"/>
+            <result column="c_comic_id" jdbcType="BIGINT" property="comicId"/>
+            <result column="c_title" jdbcType="VARCHAR" property="title"/>
+            <result column="c_sub_title" jdbcType="VARCHAR" property="subTitle"/>
+            <result column="c_order" jdbcType="INTEGER" property="order"/>
+            <result column="c_gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        </collection>
     </resultMap>
 
     <insert id="insertComic" parameterType="dev.matrixlab.comicopia.entity.comic.ComicDO" useGeneratedKeys="true" keyProperty="id">
@@ -68,12 +70,12 @@
         </where>
     </update>
 
-    <select id="selectComics" resultMap="ComicVO">
+    <select id="selectComics" resultType="dev.matrixlab.comicopia.vo.comic.ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from com_comic c
     </select>
 
-    <select id="selectComicsByName" resultMap="ComicVO">
+    <select id="selectComicsByName" resultType="dev.matrixlab.comicopia.vo.comic.ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from com_comic c
         where c.name like concat('%', #{comicName}, '%')
@@ -89,6 +91,33 @@
         select count(*)
         from com_comic c
         where c.id = #{id}
+    </select>
+
+    <select id="selectComicDetailsById" resultMap="ComicDetailsVO">
+        select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create,
+            a.id a_id, a.name a_name, a.avatar a_avatar,
+            ch.id c_id, ch.comic_id c_comic_id, ch.title c_title, ch.sub_title c_sub_title, ch.order c_order, ch.gmt_create c_gmt_create
+        from com_comic c
+        left join com_comic_author cca on cca.comic_id = c.id
+        left join com_author a on cca.author_id = a.id
+        left join com_chapter ch on ch.comic_id = c.id
+        where c.id = #{id}
+    </select>
+
+    <select id="selectComicsByAuthorName" resultType="dev.matrixlab.comicopia.vo.comic.ComicVO">
+        select distinct c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
+        from com_comic c
+        left join com_comic_author cca on cca.comic_id = c.id
+        left join com_author a on cca.author_id = a.id
+        where a.name like concat('%', #{authorName}, '%')
+    </select>
+
+    <select id="selectComicsByCategoryName" resultType="dev.matrixlab.comicopia.vo.comic.ComicVO">
+        select distinct c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
+        from com_comic c
+        left join com_comic_category ccc on ccc.comic_id = c.id
+        left join com_category ca on ccc.category_id = ca.id
+        where ca.name like concat('%', #{categoryName}, '%')
     </select>
 
 </mapper>

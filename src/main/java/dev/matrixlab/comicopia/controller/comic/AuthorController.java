@@ -45,7 +45,7 @@ public class AuthorController {
         return CallbackUtils.success(authorService.listAuthorsByName(authorName));
     }
 
-    @PostMapping("/modifyAvatarById")
+    @PutMapping("/modifyAvatarById")
     public CallbackData<String> modifyAvatarById(@RequestParam("authorId") long authorId, @RequestParam("file") MultipartFile file) {
         return CallbackUtils.success(authorService.updateAvatarById(authorId, file));
     }

@@ -10,4 +10,6 @@ public interface ImageMapper {
 
     int deleteImageByFileUID(String fileUID);
 
+    String selectImageURIByFileUID(String fileUID);
+
 }

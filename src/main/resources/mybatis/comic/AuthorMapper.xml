@@ -4,15 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapper">
 
-    <resultMap id="AuthorDO" type="dev.matrixlab.comicopia.entity.comic.AuthorDO">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="bio" jdbcType="VARCHAR" property="bio"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
-        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
-    </resultMap>
-
     <resultMap id="AuthorVO" type="dev.matrixlab.comicopia.vo.comic.AuthorVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -59,7 +50,7 @@
         </where>
     </update>
 
-    <select id="selectAuthorById" resultMap="AuthorDO">
+    <select id="selectAuthorById" resultType="dev.matrixlab.comicopia.entity.comic.AuthorDO">
         select a.id, a.name, a.bio, a.avatar, a.gmt_create, a.gmt_modified
         from com_author a
         where a.id = #{id}

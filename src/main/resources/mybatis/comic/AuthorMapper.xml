@@ -2,16 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapperTests">
-
-    <resultMap id="AuthorDO" type="dev.matrixlab.comicopia.entity.comic.AuthorDO">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="bio" jdbcType="VARCHAR" property="bio"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
-        <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
-    </resultMap>
+<mapper namespace="dev.matrixlab.comicopia.dao.mapper.comic.AuthorMapper">
 
     <resultMap id="AuthorVO" type="dev.matrixlab.comicopia.vo.comic.AuthorVO">
         <id column="id" jdbcType="BIGINT" property="id"/>
@@ -21,25 +12,25 @@
     </resultMap>
 
     <insert id="insertAuthor" parameterType="dev.matrixlab.comicopia.entity.comic.AuthorDO" useGeneratedKeys="true" keyProperty="id">
-        insert into co_author (id, name, bio, avatar, gmt_create, gmt_modified)
+        insert into com_author (id, name, bio, avatar, gmt_create, gmt_modified)
         values (#{id, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, #{avatar, jdbcType=VARCHAR},
         #{gmtCreate, jdbcType=BIGINT}, #{gmtModified, jdbcType=BIGINT})
     </insert>
 
     <delete id="deleteAuthorById">
-        delete from co_author where id = #{id}
+        delete from com_author where id = #{id}
     </delete>
 
-    <select id="nameDuplicateCheck" resultType="int">
-        select count(*) from co_author where name = #{authorName}
+    <select id="countAuthorsByName" resultType="int">
+        select count(*) from com_author where name = #{authorName}
     </select>
 
-    <select id="checkAuthorExistById" resultType="int">
-        select count(*) from co_author where id = #{id}
+    <select id="countAuthorsById" resultType="int">
+        select count(*) from com_author where id = #{id}
     </select>
 
     <update id="updateAuthorById" parameterType="dev.matrixlab.comicopia.entity.comic.AuthorDO">
-        update co_author a
+        update com_author a
         <set>
             <if test="name != null">
                 a.name = #{name},
@@ -55,18 +46,24 @@
             </if>
         </set>
         <where>
-            a.id = #{authorId}
+            a.id = #{id}
         </where>
     </update>
 
-    <select id="listAuthors" resultMap="AuthorVO">
-        select a.id, a.name, a.bio, a.avatar
-        from co_author a
+    <select id="selectAuthorById" resultType="dev.matrixlab.comicopia.entity.comic.AuthorDO">
+        select a.id, a.name, a.bio, a.avatar, a.gmt_create, a.gmt_modified
+        from com_author a
+        where a.id = #{id}
     </select>
 
-    <select id="listAuthorsByName" resultMap="AuthorVO">
+    <select id="selectAuthors" resultMap="AuthorVO">
         select a.id, a.name, a.bio, a.avatar
-        from co_author a
+        from com_author a
+    </select>
+
+    <select id="selectAuthorsByName" resultMap="AuthorVO">
+        select a.id, a.name, a.bio, a.avatar
+        from com_author a
         where name like concat('%', #{authorName}, '%')
     </select>
 

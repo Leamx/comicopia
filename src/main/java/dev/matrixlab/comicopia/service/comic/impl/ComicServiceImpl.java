@@ -1,10 +1,12 @@
 package dev.matrixlab.comicopia.service.comic.impl;
 
+import dev.matrixlab.comicopia.controller.exception.ColumnValueDuplicateException;
 import dev.matrixlab.comicopia.dao.mapper.comic.ComicMapper;
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
 import dev.matrixlab.comicopia.dto.mapper.BeanMapperStruct;
 import dev.matrixlab.comicopia.entity.comic.ComicDO;
 import dev.matrixlab.comicopia.service.comic.ComicService;
+import dev.matrixlab.comicopia.vo.comic.ComicDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ComicVO;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.springframework.stereotype.Service;
@@ -22,8 +24,8 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public String saveComic(ComicDTO comicDTO) {
-        if (comicMapper.nameDuplicateCheck(comicDTO.getName()) > 0) {
-            throw new InternalException("The comic name is duplicated, creating a comic failed.");
+        if (comicMapper.countComicsByName(comicDTO.getName()) > 0) {
+            throw new ColumnValueDuplicateException("The comic name is duplicated, creating a comic failed.");
         }
         ComicDO comicDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.comicDTO2ComicDO(comicDTO);
         Long now = System.currentTimeMillis();
@@ -39,7 +41,7 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
-    public String removeComicById(Long comicId) {
+    public String removeComicById(long comicId) {
         if (comicMapper.deleteComicById(comicId) == 0) {
             throw new InternalException("Delete failed.");
         }
@@ -48,7 +50,7 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public String updateComicById(ComicDTO comicDTO) {
-        if (comicMapper.checkComicExistById(comicDTO.getId()) == 0) {
+        if (comicMapper.countComicsById(comicDTO.getId()) == 0) {
             throw new InternalException("Comic does not exist.");
         }
         ComicDO comicDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.comicDTO2ComicDO(comicDTO);
@@ -63,10 +65,24 @@ public class ComicServiceImpl implements ComicService {
     @Override
     public List<ComicVO> listComicsByName(String comicName) {
         if ("".equals(comicName)) {
-            return comicMapper.listComics();
+            return comicMapper.selectComics();
         } else {
-            return comicMapper.listComicsByName(comicName);
+            return comicMapper.selectComicsByName(comicName);
         }
     }
 
+    @Override
+    public ComicDetailsVO getComicDetailsById(long comicId) {
+        return comicMapper.selectComicDetailsById(comicId);
+    }
+
+    @Override
+    public List<ComicVO> listComicsByAuthorName(String authorName) {
+        return comicMapper.selectComicsByAuthorName(authorName);
+    }
+
+    @Override
+    public List<ComicVO> listComicsByCategoryName(String categoryName) {
+        return comicMapper.selectComicsByCategoryName(categoryName);
+    }
 }

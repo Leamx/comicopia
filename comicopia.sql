@@ -1,4 +1,4 @@
-CREATE TABLE co_comic (
+CREATE TABLE com_comic (
     id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
     name VARCHAR(256) NOT NULL ,
     description VARCHAR(1024) NULL ,
@@ -10,8 +10,8 @@ CREATE TABLE co_comic (
     gmt_modified BIGINT UNSIGNED NOT NULL
 );
 
-CREATE TABLE co_author (
-    id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+CREATE TABLE com_author (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
     name VARCHAR(64) NOT NULL ,
     bio VARCHAR(256) NULL ,
     avatar VARCHAR(512) NULL ,
@@ -19,34 +19,47 @@ CREATE TABLE co_author (
     gmt_modified BIGINT UNSIGNED NOT NULL
 );
 
-CREATE TABLE co_category (
-    id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+CREATE TABLE com_category (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
     name VARCHAR(64) NOT NULL ,
     description VARCHAR(1024) NULL ,
     gmt_create BIGINT UNSIGNED NOT NULL ,
     gmt_modified BIGINT UNSIGNED NOT NULL
 );
 
-CREATE TABLE co_chapter (
+CREATE TABLE com_chapter (
     id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
     comic_id BIGINT UNSIGNED NOT NULL ,
     title VARCHAR(32) NULL ,
     sub_title VARCHAR(64) NULL ,
-    chapter_order INT UNSIGNED DEFAULT 0 ,
+    `order` INT UNSIGNED DEFAULT 0 ,
     gmt_create BIGINT UNSIGNED NOT NULL ,
     gmt_modified BIGINT UNSIGNED NOT NULL
 );
 
-CREATE TABLE c_image (
+CREATE TABLE com_image (
      id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
      file_uid VARCHAR(64) NOT NULL ,
-     comic_id BIGINT UNSIGNED NOT NULL ,
+     comic_id BIGINT UNSIGNED NULL ,
      chapter_id BIGINT UNSIGNED NULL ,
-     image_order INT UNSIGNED DEFAULT 0 ,
+     sort INT UNSIGNED DEFAULT 0 ,
      type TINYINT DEFAULT 0 ,
+     uri VARCHAR(512) NOT NULL ,
      original_name VARCHAR(32) NULL ,
      description VARCHAR(128) NULL ,
      extension VARCHAR(8) NULL ,
      gmt_create BIGINT UNSIGNED NOT NULL ,
      gmt_modified BIGINT UNSIGNED NOT NULL
 );
+
+CREATE TABLE com_comic_category (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    comic_id BIGINT UNSIGNED,
+    category_id BIGINT UNSIGNED
+);
+
+CREATE TABLE com_comic_author (
+    id BIGINT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
+    comic_id BIGINT UNSIGNED,
+    author_id BIGINT UNSIGNED
+)

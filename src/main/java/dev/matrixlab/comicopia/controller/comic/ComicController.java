@@ -1,42 +1,58 @@
 package dev.matrixlab.comicopia.controller.comic;
 
 import dev.matrixlab.comicopia.dto.comic.ComicDTO;
-import dev.matrixlab.comicopia.dto.system.CallbackData;
+import dev.matrixlab.comicopia.entity.system.CallbackData;
 import dev.matrixlab.comicopia.service.comic.ComicService;
-import lombok.RequiredArgsConstructor;
+import dev.matrixlab.comicopia.utils.CallbackUtils;
+import dev.matrixlab.comicopia.vo.comic.ComicDetailsVO;
+import dev.matrixlab.comicopia.vo.comic.ComicVO;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/comic")
-@RequiredArgsConstructor
 public class ComicController {
 
     private final ComicService comicService;
 
-    @PostMapping("/createComic")
-    public CallbackData createComic(@RequestBody ComicDTO comicDTO) {
-        return CallbackData.build(true, () -> {
-            comicService.createComic(comicDTO);
-        });
+    public ComicController(final ComicService comicService) {
+        this.comicService = comicService;
+    }
+
+    @PostMapping("/addComic")
+    public CallbackData<String> addComic(@RequestBody ComicDTO comicDTO) {
+        return CallbackUtils.success(comicService.saveComic(comicDTO));
     }
 
     @DeleteMapping("/deleteComicById")
-    public CallbackData deleteComicById(@RequestParam("comicId") Long comicId) {
-        return CallbackData.build(true, () -> {
-           comicService.deleteComicById(comicId);
-        });
+    public CallbackData<String> deleteComicById(@RequestParam("comicId") long comicId) {
+        return CallbackUtils.success(comicService.removeComicById(comicId));
     }
 
-    @PutMapping("/updateComicById")
-    public CallbackData updateComicById(@RequestBody ComicDTO comicDTO) {
-        return CallbackData.build(true, () -> {
-            comicService.updateComicById(comicDTO);
-        });
+    @PutMapping("/modifyComicById")
+    public CallbackData<String> modifyComicById(@RequestBody ComicDTO comicDTO) {
+        return CallbackUtils.success(comicService.updateComicById(comicDTO));
     }
 
-    @GetMapping("/getComicListByName")
-    public CallbackData getComicListByName(@RequestParam(value = "comicName", required = false, defaultValue = "") String comicName) {
-        return CallbackData.build(true, comicService.listComicsByName(comicName));
+    @GetMapping("/queryComicsByName")
+    public CallbackData<List<ComicVO>> queryComicsByName(@RequestParam(value = "comicName", required = false, defaultValue = "") String comicName) {
+        return CallbackUtils.success(comicService.listComicsByName(comicName));
+    }
+
+    @GetMapping("/queryComicDetailsById")
+    public CallbackData<ComicDetailsVO> queryComicDetailsById(@RequestParam("comicId") long comicId) {
+        return CallbackUtils.success(comicService.getComicDetailsById(comicId));
+    }
+
+    @GetMapping("/queryComicsByAuthorName")
+    public CallbackData<List<ComicVO>> queryComicDetailsByAuthorName(@RequestParam("authorName") String authorName) {
+        return CallbackUtils.success(comicService.listComicsByAuthorName(authorName));
+    }
+
+    @GetMapping("/queryComicsByCategoryName")
+    public CallbackData<List<ComicVO>> queryComicDetailsByCategoryName(@RequestParam("categoryName") String categoryName) {
+        return CallbackUtils.success(comicService.listComicsByCategoryName(categoryName));
     }
 
 }

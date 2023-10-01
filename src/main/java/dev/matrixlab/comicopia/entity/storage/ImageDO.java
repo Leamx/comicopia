@@ -1,4 +1,4 @@
-package dev.matrixlab.comicopia.entity.comic;
+package dev.matrixlab.comicopia.entity.storage;
 
 public class ImageDO {
 
@@ -10,10 +10,12 @@ public class ImageDO {
 
     private Long chapterId;
 
-    private Integer imageOrder;
+    private Integer sort;
 
-    // 0: normal 1: chatper cover 2: comic cover
+    // 0: normal 1: chatper cover 2: comic cover 3: avatar
     private Integer type;
+
+    private String uri;
 
     private String originalName;
 
@@ -57,12 +59,12 @@ public class ImageDO {
         this.chapterId = chapterId;
     }
 
-    public Integer getImageOrder() {
-        return imageOrder;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setImageOrder(Integer imageOrder) {
-        this.imageOrder = imageOrder;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Integer getType() {
@@ -71,6 +73,14 @@ public class ImageDO {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getOriginalName() {
@@ -120,8 +130,9 @@ public class ImageDO {
                 ", fileUID='" + fileUID + '\'' +
                 ", comicId=" + comicId +
                 ", chapterId=" + chapterId +
-                ", imageOrder=" + imageOrder +
+                ", sort=" + sort +
                 ", type=" + type +
+                ", uri='" + uri + '\'' +
                 ", originalName='" + originalName + '\'' +
                 ", description='" + description + '\'' +
                 ", extension='" + extension + '\'' +
@@ -129,5 +140,4 @@ public class ImageDO {
                 ", gmtModified=" + gmtModified +
                 '}';
     }
-    
 }

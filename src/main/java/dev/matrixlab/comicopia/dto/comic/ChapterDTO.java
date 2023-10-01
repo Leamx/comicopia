@@ -1,10 +1,10 @@
-package dev.matrixlab.comicopia.vo.comic;
+package dev.matrixlab.comicopia.dto.comic;
 
 import java.io.Serializable;
 
-public class ChapterInfoVO implements Serializable {
+public class ChapterDTO implements Serializable {
 
-    private static final long serialVersionUID = -5265178301958953468L;
+    private static final long serialVersionUID = 6965207432762767970L;
 
     private Long id;
 
@@ -13,8 +13,6 @@ public class ChapterInfoVO implements Serializable {
     private String title;
 
     private String subTitle;
-
-    private Integer chapterOrder;
 
     private Long gmtCreate;
 
@@ -50,14 +48,6 @@ public class ChapterInfoVO implements Serializable {
         this.subTitle = subTitle;
     }
 
-    public Integer getChapterOrder() {
-        return chapterOrder;
-    }
-
-    public void setChapterOrder(Integer chapterOrder) {
-        this.chapterOrder = chapterOrder;
-    }
-
     public Long getGmtCreate() {
         return gmtCreate;
     }
@@ -68,12 +58,11 @@ public class ChapterInfoVO implements Serializable {
 
     @Override
     public String toString() {
-        return "ChapterInfoVO{" +
+        return "ChapterDTO{" +
                 "id=" + id +
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
-                ", chapterOrder=" + chapterOrder +
                 ", gmtCreate=" + gmtCreate +
                 '}';
     }

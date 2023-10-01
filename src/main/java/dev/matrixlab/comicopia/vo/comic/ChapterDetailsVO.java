@@ -1,10 +1,12 @@
-package dev.matrixlab.comicopia.dto.comic;
+package dev.matrixlab.comicopia.vo.comic;
+
+import dev.matrixlab.comicopia.vo.storage.ImageVO;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class ChapterInfoDTO implements Serializable {
-
-    private static final long serialVersionUID = 6965207432762767970L;
+public class ChapterDetailsVO implements Serializable {
+    private static final long serialVersionUID = -7577348408220687058L;
 
     private Long id;
 
@@ -14,9 +16,11 @@ public class ChapterInfoDTO implements Serializable {
 
     private String subTitle;
 
-    private Integer chapterOrder;
+    private Integer order;
 
     private Long gmtCreate;
+
+    private List<ImageVO> images;
 
     public Long getId() {
         return id;
@@ -50,12 +54,12 @@ public class ChapterInfoDTO implements Serializable {
         this.subTitle = subTitle;
     }
 
-    public Integer getChapterOrder() {
-        return chapterOrder;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setChapterOrder(Integer chapterOrder) {
-        this.chapterOrder = chapterOrder;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public Long getGmtCreate() {
@@ -66,16 +70,24 @@ public class ChapterInfoDTO implements Serializable {
         this.gmtCreate = gmtCreate;
     }
 
+    public List<ImageVO> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageVO> images) {
+        this.images = images;
+    }
+
     @Override
     public String toString() {
-        return "ChapterInfoDTO{" +
+        return "ChapterDetailsVO{" +
                 "id=" + id +
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
-                ", chapterOrder=" + chapterOrder +
+                ", order=" + order +
                 ", gmtCreate=" + gmtCreate +
+                ", images=" + images +
                 '}';
     }
-
 }

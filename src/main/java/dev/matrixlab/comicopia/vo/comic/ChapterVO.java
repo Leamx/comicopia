@@ -1,6 +1,10 @@
-package dev.matrixlab.comicopia.entity.comic;
+package dev.matrixlab.comicopia.vo.comic;
 
-public class ChapterDO {
+import java.io.Serializable;
+
+public class ChapterVO implements Serializable {
+
+    private static final long serialVersionUID = -5265178301958953468L;
 
     private Long id;
 
@@ -10,12 +14,9 @@ public class ChapterDO {
 
     private String subTitle;
 
-    // 章节顺序
     private Integer order;
 
     private Long gmtCreate;
-
-    private Long gmtModified;
 
     public Long getId() {
         return id;
@@ -65,24 +66,15 @@ public class ChapterDO {
         this.gmtCreate = gmtCreate;
     }
 
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
     @Override
     public String toString() {
-        return "ChapterDO{" +
+        return "ChapterVO{" +
                 "id=" + id +
                 ", comicId=" + comicId +
                 ", title='" + title + '\'' +
                 ", subTitle='" + subTitle + '\'' +
                 ", order=" + order +
                 ", gmtCreate=" + gmtCreate +
-                ", gmtModified=" + gmtModified +
                 '}';
     }
 }

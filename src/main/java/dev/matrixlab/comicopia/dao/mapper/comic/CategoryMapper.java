@@ -12,15 +12,15 @@ public interface CategoryMapper {
 
     int insertCategory(CategoryDO categoryDO);
 
-    Integer nameDuplicateCheck(@Param("categoryName") String categoryName);
+    int countCategoriesByName(@Param("categoryName") String categoryName);
 
-    int deleteCategoryById(@Param("id") Long id);
+    int deleteCategoryById(@Param("id") long id);
 
-    int checkCategoryExistById(@Param("id") Integer id);
+    int countCategoriesById(@Param("id") long id);
 
     int updateCategoryById(CategoryDO categoryDO);
 
-    List<CategoryVO> listCategories();
+    List<CategoryVO> selectCategories();
 
-    List<CategoryVO> listCategoriesByName(@Param("categoryName") String categoryName);
+    List<CategoryVO> selectCategoriesByName(@Param("categoryName") String categoryName);
 }

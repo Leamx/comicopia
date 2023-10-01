@@ -1,6 +1,7 @@
 package dev.matrixlab.comicopia.dao.mapper.comic;
 
 import dev.matrixlab.comicopia.entity.comic.ComicDO;
+import dev.matrixlab.comicopia.vo.comic.ComicDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ComicVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,15 +13,21 @@ public interface ComicMapper {
 
     int insertComic(ComicDO comicDO);
 
-    int deleteComicById(@Param("id") Long id);
+    int deleteComicById(@Param("id") long id);
 
     int updateComicById(ComicDO comicDO);
 
-    List<ComicVO> listComics();
+    List<ComicVO> selectComics();
 
-    List<ComicVO> listComicsByName(@Param("comicName") String comicName);
+    List<ComicVO> selectComicsByName(@Param("comicName") String comicName);
 
-    int nameDuplicateCheck(@Param("comicName") String comicName);
+    int countComicsByName(@Param("comicName") String comicName);
 
-    int checkComicExistById(@Param("id") Long id);
+    int countComicsById(@Param("id") long id);
+
+    ComicDetailsVO selectComicDetailsById(@Param("id") long id);
+
+    List<ComicVO> selectComicsByAuthorName(String authorName);
+
+    List<ComicVO> selectComicsByCategoryName(String categoryName);
 }

@@ -73,6 +73,9 @@ public class ComicServiceImpl implements ComicService {
 
     @Override
     public ComicDetailsVO getComicDetailsById(long comicId) {
+        // 更新漫画浏览量
+        comicMapper.updateViewsById(comicId);
+        // 查找漫画详情
         return comicMapper.selectComicDetailsById(comicId);
     }
 

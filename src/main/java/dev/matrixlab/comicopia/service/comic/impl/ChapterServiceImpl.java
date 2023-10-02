@@ -94,6 +94,9 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public ChapterDetailsVO getChapterDetailsById(long chapterId) {
+        // 更新漫画浏览量
+        comicMapper.updateViewsByChapterId(chapterId);
+        // 查找章节详情
         return chapterMapper.selectChapterDetailsById(chapterId);
     }
 

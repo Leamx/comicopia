@@ -11,6 +11,11 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper {
 
+    /**
+     * 通过漫画 id 查询当前漫画的章节数量
+     * @param comicId 漫画 id
+     * @return 章节数量
+     */
     int countChapterByComicId(@Param("comicId") long comicId);
 
     int insertChapter(ChapterDO chapterDO);

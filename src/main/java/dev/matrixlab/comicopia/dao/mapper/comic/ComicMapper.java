@@ -17,6 +17,18 @@ public interface ComicMapper {
 
     int updateComicById(ComicDO comicDO);
 
+    /**
+     * 漫画浏览量加 1
+     * @param id 漫画 id
+     */
+    void updateViewsById(@Param("id") long id);
+
+    /**
+     * 漫画浏览量加 1
+     * @param chapterId 章节 id
+     */
+    void updateViewsByChapterId(@Param("chapterId") long chapterId);
+
     List<ComicVO> selectComics();
 
     List<ComicVO> selectComicsByName(@Param("comicName") String comicName);

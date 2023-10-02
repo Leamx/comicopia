@@ -30,4 +30,7 @@ public interface ComicMapper {
     List<ComicVO> selectComicsByAuthorName(String authorName);
 
     List<ComicVO> selectComicsByCategoryName(String categoryName);
+
+    // 更新修改时间
+    int updateComicModifiedTimeById(@Param("id") long id, @Param("modifiedTime") long modifiedTime);
 }

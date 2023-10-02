@@ -7,6 +7,7 @@ import dev.matrixlab.comicopia.utils.CallbackUtils;
 import dev.matrixlab.comicopia.vo.comic.ChapterDetailsVO;
 import dev.matrixlab.comicopia.vo.comic.ChapterVO;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -43,6 +44,11 @@ public class ChapterController {
     @GetMapping("/queryChapterDetailsById")
     public CallbackData<ChapterDetailsVO> queryChapterDetailsById(@RequestParam("chapterId") long chapterId) {
         return CallbackUtils.success(chapterService.getChapterDetailsById(chapterId));
+    }
+
+    @PostMapping("/addChapterImagesById")
+    public CallbackData<String> addChapterImagesById(@RequestParam("chapterId") long chapterId, @RequestParam("files") List<MultipartFile> files) {
+        return CallbackUtils.success(chapterService.saveChapterImagesById(chapterId, files));
     }
 
 }

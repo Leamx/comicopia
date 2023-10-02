@@ -48,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
             throw new ColumnValueDuplicateException("The author name is duplicated, creating a author failed.");
         }
         AuthorDO authorDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.authorDTO2AuthorDO(authorDTO);
-        Long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
         authorDO.setGmtCreate(now);
         authorDO.setGmtModified(now);
         if (authorMapper.insertAuthor(authorDO) == 0) {
@@ -71,7 +71,7 @@ public class AuthorServiceImpl implements AuthorService {
             throw new InternalException("Author does not exist.");
         }
         AuthorDO authorDO = BeanMapperStruct.BEAN_MAPPER_STRUCT.authorDTO2AuthorDO(authorDTO);
-        Long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
         authorDO.setGmtModified(now);
         if (authorMapper.updateAuthorById(authorDO) == 0) {
             throw new InternalException("Update failed.");
@@ -96,7 +96,7 @@ public class AuthorServiceImpl implements AuthorService {
             throw new InternalException("Author does not exist.");
         }
         try {
-            Long now = System.currentTimeMillis();
+            long now = System.currentTimeMillis();
             // 计算图片的 md5
             String md5Hex = DigestUtils.md5Hex(file.getInputStream());
 

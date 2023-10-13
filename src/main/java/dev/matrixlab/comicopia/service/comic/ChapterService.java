@@ -21,7 +21,7 @@ public interface ChapterService {
 
     /**
      * 根据章节id保存章节图片
-     * @param chapterId 章节id
+     * @param chapterId 章节 id
      * @param files 图片文件
      * @return 保存结果
      */

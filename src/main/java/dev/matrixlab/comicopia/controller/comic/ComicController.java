@@ -40,19 +40,19 @@ public class ComicController {
         return CallbackUtils.success(comicService.listComicsByName(comicName));
     }
 
-    @GetMapping("/queryComicDetailsById")
-    public CallbackData<ComicDetailsVO> queryComicDetailsById(@RequestParam("comicId") long comicId) {
-        return CallbackUtils.success(comicService.getComicDetailsById(comicId));
-    }
-
     @GetMapping("/queryComicsByAuthorName")
-    public CallbackData<List<ComicVO>> queryComicDetailsByAuthorName(@RequestParam("authorName") String authorName) {
+    public CallbackData<List<ComicVO>> queryComicDetailsByAuthorName(@RequestParam(value = "authorName", required = false, defaultValue = "") String authorName) {
         return CallbackUtils.success(comicService.listComicsByAuthorName(authorName));
     }
 
     @GetMapping("/queryComicsByCategoryName")
-    public CallbackData<List<ComicVO>> queryComicDetailsByCategoryName(@RequestParam("categoryName") String categoryName) {
+    public CallbackData<List<ComicVO>> queryComicDetailsByCategoryName(@RequestParam(value = "categoryName", required = false, defaultValue = "") String categoryName) {
         return CallbackUtils.success(comicService.listComicsByCategoryName(categoryName));
+    }
+
+    @GetMapping("/queryComicDetailsById")
+    public CallbackData<ComicDetailsVO> queryComicDetailsById(@RequestParam("comicId") long comicId) {
+        return CallbackUtils.success(comicService.getComicDetailsById(comicId));
     }
 
 }

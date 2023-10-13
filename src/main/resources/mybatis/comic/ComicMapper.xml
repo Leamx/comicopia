@@ -83,6 +83,12 @@
         where ch.id = #{chapterId}
     </update>
 
+    <update id="updateLikesById">
+        update com_comic c
+        set c.likes = c.likes + 1
+        where c.id = #{id}
+    </update>
+
     <select id="selectComics" resultType="dev.matrixlab.comicopia.vo.comic.ComicVO">
         select c.id, c.name, c.description, c.cover_url, c.status, c.views, c.likes, c.gmt_create, c.gmt_modified
         from com_comic c

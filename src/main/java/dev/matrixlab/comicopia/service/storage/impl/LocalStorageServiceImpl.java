@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Service
 public class LocalStorageServiceImpl implements FileStorageService {
@@ -41,7 +40,7 @@ public class LocalStorageServiceImpl implements FileStorageService {
         try {
             Path targetPath = this.fileStoragePath.resolve(fileUID + "." + EXTENSION);
             if (!Files.exists(targetPath)) {
-                Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                file.transferTo(targetPath);
             }
             return uri;
         } catch (IOException e) {

@@ -59,7 +59,8 @@ public class ChapterServiceImpl implements ChapterService {
         chapterDO.setOrder(++count);
         chapterDO.setGmtCreate(now);
         chapterDO.setGmtModified(now);
-        if (chapterMapper.insertChapter(chapterDO) == 0) {
+        // 插入新章节，并且更新漫画修改时间
+        if (chapterMapper.insertChapter(chapterDO) == 0 || comicMapper.updateComicModifiedTimeById(chapterDO.getComicId(), now) == 0) {
             throw new InternalException("Save failed.");
         }
         return "Added chapter successfully.";
@@ -115,7 +116,7 @@ public class ChapterServiceImpl implements ChapterService {
             ImageMapper imageMapper = sqlSession.getMapper(ImageMapper.class);
             // 先删除该章节之前的图片
             imageMapper.deleteImagesByChapterId(chapterId);
-            // 记录图片顺序
+            // 记录图片顺序，不采用累加方式，每次更新都重新排序
             int sort = 0;
             for (MultipartFile file : files) {
                 String md5Hex = DigestUtils.md5Hex(file.getInputStream());
@@ -136,9 +137,6 @@ public class ChapterServiceImpl implements ChapterService {
                 if (imageMapper.insertImage(imageDO) == 0) {
                     throw new SqlExecuteErrorException("保存章节图片异常");
                 }
-            }
-            if (comicMapper.updateComicModifiedTimeById(chapterDO.getComicId(), now) == 0) {
-                throw new SqlExecuteErrorException("更新漫画修改时间异常");
             }
             sqlSession.commit();
         } catch (IOException e) {

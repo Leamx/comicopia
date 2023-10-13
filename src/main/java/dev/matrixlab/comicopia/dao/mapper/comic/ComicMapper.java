@@ -18,10 +18,16 @@ public interface ComicMapper {
     int updateComicById(ComicDO comicDO);
 
     /**
-     * 漫画浏览量加 1
+     * 漫画浏览量（加 1）
      * @param id 漫画 id
      */
     void updateViewsById(@Param("id") long id);
+
+    /**
+     * 更新漫画喜欢（加 1）
+     * @param id 漫画id
+     */
+    void updateLikesById(@Param("id") long id);
 
     /**
      * 漫画浏览量加 1
@@ -43,6 +49,6 @@ public interface ComicMapper {
 
     List<ComicVO> selectComicsByCategoryName(String categoryName);
 
-    // 更新修改时间
+    // 更新漫画修改时间（比如漫画详情修改，添加章节）
     int updateComicModifiedTimeById(@Param("id") long id, @Param("modifiedTime") long modifiedTime);
 }

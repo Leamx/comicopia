@@ -72,20 +72,28 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
+    public List<ComicVO> listComicsByAuthorName(String authorName) {
+        if ("".equals(authorName)) {
+            return comicMapper.selectComics();
+        } else {
+            return comicMapper.selectComicsByAuthorName(authorName);
+        }
+    }
+
+    @Override
+    public List<ComicVO> listComicsByCategoryName(String categoryName) {
+        if ("".equals(categoryName)) {
+            return comicMapper.selectComics();
+        } else {
+            return comicMapper.selectComicsByCategoryName(categoryName);
+        }
+    }
+
+    @Override
     public ComicDetailsVO getComicDetailsById(long comicId) {
         // 更新漫画浏览量
         comicMapper.updateViewsById(comicId);
         // 查找漫画详情
         return comicMapper.selectComicDetailsById(comicId);
-    }
-
-    @Override
-    public List<ComicVO> listComicsByAuthorName(String authorName) {
-        return comicMapper.selectComicsByAuthorName(authorName);
-    }
-
-    @Override
-    public List<ComicVO> listComicsByCategoryName(String categoryName) {
-        return comicMapper.selectComicsByCategoryName(categoryName);
     }
 }
